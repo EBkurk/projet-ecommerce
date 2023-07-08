@@ -165,6 +165,6 @@ class __TwigTemplate_dc281886fcbeb44064f8476f0798ce27 extends Template
         <button type=\"submit\" class=\"btn\">Valider</button>
     {{ form_end(registrationForm) }}
 {% endblock %}
-", "registration/register.html.twig", "C:\\Users\\bille\\Desktop\\e-commerce\\projet-ecommerce\\templates\\registration\\register.html.twig");
+", "registration/register.html.twig", "E:\\repo_git\\symfony\\projet-ecommerce\\templates\\registration\\register.html.twig");
     }
 }

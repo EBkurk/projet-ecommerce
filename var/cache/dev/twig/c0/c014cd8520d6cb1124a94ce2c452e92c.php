@@ -119,6 +119,6 @@ class __TwigTemplate_ac1735efa231965ccbb7e8d21fb1be99 extends Template
 {% block body %}
     <h1>Bienvenue sur le site</h1>
 {% endblock %}
-", "home/index.html.twig", "C:\\Users\\bille\\Desktop\\e-commerce\\projet-ecommerce\\templates\\home\\index.html.twig");
+", "home/index.html.twig", "E:\\repo_git\\symfony\\projet-ecommerce\\templates\\home\\index.html.twig");
     }
 }
