@@ -53,7 +53,7 @@ class __TwigTemplate_b07c10505ab3aeb7063e0dead10d2d99 extends Template
         echo "</strong>. Après cette date, il ne sera plus valable.<br><br>
     <a href=\"";
         // line 6
-        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\HttpFoundationExtension']->generateAbsoluteUrl($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("account_verify", ["token" => (isset($context["token"]) || array_key_exists("token", $context) ? $context["token"] : (function () { throw new RuntimeError('Variable "token" does not exist.', 6, $this->source); })()), "id" => 5])), "html", null, true);
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\HttpFoundationExtension']->generateAbsoluteUrl($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("account_verify", ["token" => (isset($context["token"]) || array_key_exists("token", $context) ? $context["token"] : (function () { throw new RuntimeError('Variable "token" does not exist.', 6, $this->source); })()), "id" => twig_get_attribute($this->env, $this->source, (isset($context["user"]) || array_key_exists("user", $context) ? $context["user"] : (function () { throw new RuntimeError('Variable "user" does not exist.', 6, $this->source); })()), "id", [], "any", false, false, false, 6)])), "html", null, true);
         echo "\"> Vérifier mon compte</a><br><br>
     <strong>Ceci est un email automatique, merci de ne pas y répondre</strong><br><br>
     A bientôt sur notre site !
@@ -88,9 +88,9 @@ class __TwigTemplate_b07c10505ab3aeb7063e0dead10d2d99 extends Template
     Bonjour, {{ user.username }} et bienvenue sur notre site.<br><br>
     Veuillez confirmer votre compte dès maintenant en cliquant sur le lien ci-dessous:<br><br>
     Ce lien est valable jusqu'au <strong>{{ lifeTimeToken }}</strong>. Après cette date, il ne sera plus valable.<br><br>
-    <a href=\"{{ absolute_url(path('account_verify', {token: token, id: 5})) }}\"> Vérifier mon compte</a><br><br>
+    <a href=\"{{ absolute_url(path('account_verify', {token: token, id: user.id})) }}\"> Vérifier mon compte</a><br><br>
     <strong>Ceci est un email automatique, merci de ne pas y répondre</strong><br><br>
     A bientôt sur notre site !
-</p>", "mails/registration_confirmation.html.twig", "C:\\Users\\bille\\Desktop\\e-commerce\\projet-ecommerce\\templates\\mails\\registration_confirmation.html.twig");
+</p>", "mails/registration_confirmation.html.twig", "E:\\repo_git\\symfony\\projet-ecommerce\\templates\\mails\\registration_confirmation.html.twig");
     }
 }

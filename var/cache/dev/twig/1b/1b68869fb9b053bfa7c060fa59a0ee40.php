@@ -106,9 +106,11 @@ class __TwigTemplate_943d304f243edb26a7176184937383e9 extends Template
         <p>
             ";
             // line 14
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["product"], "content", [], "any", false, false, false, 14), "html", null, true);
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["product"], "subtitle", [], "any", false, false, false, 14), "html", null, true);
             echo "
         </p>
+
+        <hr>
 
 
     ";
@@ -116,7 +118,7 @@ class __TwigTemplate_943d304f243edb26a7176184937383e9 extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['product'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 19
+        // line 21
         echo "
 ";
         
@@ -139,7 +141,7 @@ class __TwigTemplate_943d304f243edb26a7176184937383e9 extends Template
 
     public function getDebugInfo()
     {
-        return array (  120 => 19,  109 => 14,  104 => 12,  100 => 11,  97 => 10,  93 => 9,  88 => 6,  78 => 5,  59 => 3,  36 => 1,);
+        return array (  122 => 21,  109 => 14,  104 => 12,  100 => 11,  97 => 10,  93 => 9,  88 => 6,  78 => 5,  59 => 3,  36 => 1,);
     }
 
     public function getSourceContext()
@@ -157,8 +159,10 @@ class __TwigTemplate_943d304f243edb26a7176184937383e9 extends Template
         <h1>{{ product.title }}</h1>
         <strong>{{ product.price}}</strong>
         <p>
-            {{product.content}}
+            {{product.subtitle}}
         </p>
+
+        <hr>
 
 
     {% endfor %}
