@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Materiaux index{% endblock %}
+
+{% block body %}
+    <h1>Materiaux index</h1>
+    <input type="hidden" id="NomObjet" value="Materiaux">
+    <input type="hidden" id="Url" value="{{ path('app_fetch_tableau') }}">
+    <table class="table sortable" id="MyTable">
+        <thead>
+            <tr>
+                <td class="no-sort colloneTable"><input id="checkboxAll" type="checkbox" onchange="selectAll(this)"></td>
+                <th>Id</th>
+                <th>Nom</th>
+                <th class="no-sort">actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for materiaux in materiauxes %}
+            <tr>
+                <td><input type="checkbox" onchange="selectOne()"></td>
+                <td>{{ materiaux.id }}</td>
+                <td>{{ materiaux.nom }}</td>
+                <td>
+                    <a href="{{ path('app_materiaux_show', {'id': materiaux.id}) }}">show</a>
+                    <a href="{{ path('app_materiaux_edit', {'id': materiaux.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_materiaux_new') }}">Créer un nouveau</a>
+    <a href="{{ path('homepage') }}">Retour menu</a>
+    <button id="btn-delete-row" style="display: none" onclick="deleteRows()" class="btn btn-danger">Supprimer</button>
+{% endblock %}

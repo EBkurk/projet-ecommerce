@@ -1,0 +1,9 @@
+td.colloneTable {
+    background: var(--th-bg);
+    color: var(--th-color);
+    font-weight: normal;
+    text-align: left;
+    text-transform: capitalize;
+    vertical-align: baseline;
+    white-space: nowrap
+}

@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Utilisateur index{% endblock %}
+
+{% block body %}
+    <h1>Utilisateur index</h1>
+    <input type="hidden" id="NomObjet" value="Utilisateur">
+    <input type="hidden" id="Url" value="{{ path('app_fetch_tableau') }}">
+    <table class="table sortable" id="MyTable">
+        <thead>
+            <tr>
+                <td class="no-sort colloneTable"><input id="checkboxAll" type="checkbox" onchange="selectAll(this)"></td>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Tel</th>
+                <th>Email</th>
+                <th>Mdp</th>
+                <th class="no-sort">actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for utilisateur in utilisateurs %}
+            <tr>
+                <td><input type="checkbox" onchange="selectOne()"></td>
+                <td>{{ utilisateur.id }}</td>
+                <td>{{ utilisateur.nom }}</td>
+                <td>{{ utilisateur.prenom }}</td>
+                <td>{{ utilisateur.tel }}</td>
+                <td>{{ utilisateur.email }}</td>
+                <td>{{ utilisateur.mdp }}</td>
+                <td>
+                    <a href="{{ path('app_utilisateur_show', {'id': utilisateur.id}) }}">show</a>
+                    <a href="{{ path('app_utilisateur_edit', {'id': utilisateur.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_utilisateur_new') }}">Créer un nouveau</a>
+    <a href="{{ path('homepage') }}">Retour menu</a>
+    <button id="btn-delete-row" style="display: none" onclick="deleteRows()" class="btn btn-danger">Supprimer</button>
+{% endblock %}
