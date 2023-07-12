@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use Doctrine\DBAL\Connection;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,7 +13,7 @@ class ProductController extends FrontAbstractController
 {
 
     #[Route('/{id}/boutique', name: 'shop_index')]
-    public function index(Request $request): Response
+    public function index(Request $request, Connection $connection): Response
     {
         $produit = $this->produitRepository->find($request->attributes->get('id'));
 
@@ -22,12 +23,20 @@ class ProductController extends FrontAbstractController
             ->add('nombre', ChoiceType::class, [
                 'choices' => $choices,
             ])
-            ->add('submit', SubmitType::class, ['label' => 'Acheter'])
+            ->add('submit', SubmitType::class, ['label' => '“AJOUTER AU PANIER'])
             ->getForm()->createView();
+
+        $sql="SELECT * FROM produit where categorie_id = :cat and id != :id order by RAND() limit 6";
+        $stmt = $connection->prepare($sql);
+        $stmt->bindValue("cat", $produit->getCategorie()->getId());
+        $stmt->bindValue("id", $produit->getId());
+        $similar = $stmt->executeQuery();
+        $similar = $similar->fetchAllAssociative();
 
         return $this->render('product/index.html.twig', [
             'product' => $produit,
             'form' => $form,
+            'similaires' => $similar,
         ]);
     }
 }

@@ -47,8 +47,7 @@ class ProduitRepository extends ServiceEntityRepository
             ->setParameter('val', true)
             ->orderBy('p.id', 'ASC')
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
 
 //    /**
