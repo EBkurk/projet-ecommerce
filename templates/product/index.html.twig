@@ -11,13 +11,32 @@
     {% if product.stock > 0 %}
         Stock : {{ product.stock }}
     {% else %}
-        <p>Il n'a plus de ce produit en stock</p>
+        <p>STOCK ÉPUISÉ</p>
     {% endif %}
     <br>
     {{ form_start(form) }}
         {{ form_widget(form.nombre) }}
         {{ form_widget(form.submit) }}
-    {{ form_end(form) }}
-    {# <a class="btn btn-info">Acheter</a> #}
+    {{ form_end(form) }}<hr>
+
+    <div class="row">
+        <h1>Similaires</h1>
+        {% for produits in similaires %}
+            <article class="col-4 mb-4">
+                <div class="card">
+                    <h2 class="card-header">
+                        {{ produits.nom }}
+                    </h2>
+                    <div class="card-body article_contenu">
+                        {{ produits.description }}
+                    </div>
+                    <footer class="card-footer d-flex justify-content-between">
+                        <a href="{{ path('shop_index', {'id': produits.id}) }}">Cliquer ici pour voir le produit</a>
+                        <h5 class="mt-2">{{ produits.prix }} €</h5>
+                    </footer>
+                </div>
+            </article>
+        {% endfor %}
+    </div>
 
 {% endblock %}
