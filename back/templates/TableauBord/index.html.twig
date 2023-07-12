@@ -1,0 +1,285 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Histogramme des ventes{% endblock %}
+
+{% block body %}
+
+    <a href="{{ path('homepage') }}">Retour menu</a>
+
+    <div style="width: 800px">
+        <h1 id="TextHisto1">Histogramme du total des ventes des 7 derniers jours</h1>
+        <canvas id="salesChart"></canvas><br>
+        <button id="btnLastDays">Total des commandes des 7 derniers jours</button>
+        <button id="btnLastWeeks">Total des commandes par semaine sur les 5 dernières semaines</button>
+    </div>
+
+    <div style="width: 800px">
+        <h1 id="TextHisto2">Histogramme du total des ventes par catégories des 7 derniers jours</h1>
+        <canvas id="salesChartCategory"></canvas><br>
+        <button id="btnLastDaysCategory">Total des commandes des 7 derniers jours</button>
+        <button id="btnLastWeeksCategory">Total des commandes par semaine sur les 5 dernières semaines</button>
+    </div>
+    
+
+    <script>
+        // Récupération des données depuis Symfony et formatage
+        var salesData = {{ salesData|json_encode|raw }};
+        var labels = [];
+        var totals = [];
+
+        labels = Object.keys(salesData);
+        totals = Object.values(salesData);
+
+        // Création de l'histogramme avec Chart.js
+        var ctx = document.getElementById('salesChart').getContext('2d');
+        var chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Total des ventes par jour',
+                    data: totals,
+                    backgroundColor: 'rgba(0, 123, 255, 0.7)'
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        stepSize: 50
+                    }
+                }
+            }
+        });
+
+
+        document.getElementById("btnLastWeeks").addEventListener("click", fetchTotalLastWeeks);
+
+        // Écouteur de clic pour le bouton des 7 derniers jours
+        document.getElementById("btnLastDays").addEventListener("click", fetchTotalLastDays);
+
+        // Fonction pour récupérer le total des commandes par semaine sur les 5 dernières semaines
+        function fetchTotalLastWeeks() {
+            document.getElementById('TextHisto1').innerHTML = "Histogramme du total des ventes des 5 dernieres semaines";
+            fetch('/path/to/endpoint/last-weeks')
+                .then(response => response.json())
+                .then(data => {
+                    Chart.getChart("salesChart").destroy();
+                    var labels = [];
+                    var totals = [];
+
+                    labels = Object.keys(data);
+                    totals = Object.values(data);
+
+                    // Création de l'histogramme avec Chart.js
+                    var ctx = document.getElementById('salesChart').getContext('2d');
+                    var chart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: labels,
+                            datasets: [{
+                                label: 'Total des ventes par semaines',
+                                data: totals,
+                                backgroundColor: 'rgba(0, 123, 255, 0.7)'
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                    stepSize: 50
+                                }
+                            }
+                        }
+                    });
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        }
+
+        // Fonction pour récupérer le total des commandes des 7 derniers jours
+        function fetchTotalLastDays() {
+            document.getElementById('TextHisto1').innerHTML = "Histogramme du total des ventes des 7 derniers jours";
+            fetch('/path/to/endpoint/last-days')
+                .then(response => response.json())
+                .then(data => {
+                    Chart.getChart("salesChart").destroy();
+                    var labels = [];
+                    var totals = [];
+
+                    labels = Object.keys(data);
+                    totals = Object.values(data);
+
+                    // Création de l'histogramme avec Chart.js
+                    var ctx = document.getElementById('salesChart').getContext('2d');
+                    var chart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: labels,
+                            datasets: [{
+                                label: 'Total des ventes par jour',
+                                data: totals,
+                                backgroundColor: 'rgba(0, 123, 255, 0.7)'
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                    stepSize: 50
+                                }
+                            }
+                        }
+                    });
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        }
+
+
+        var salesDataCategory = {{ salesDataCategory|json_encode|raw }};
+        var labelsCategory = [];
+        var totalsCategory = [];
+
+        labelsCategory = Object.keys(salesDataCategory);
+        totalsCategory = Object.values(salesDataCategory);
+
+        const keys = Array.from(new Set(totalsCategory.flatMap(obj => Object.keys(obj))));
+
+        const resultArray = keys.map(key => totalsCategory.map(obj => obj[key]));
+
+        const resultJSON = {};
+
+        const jsonChart = keys.map((key, index) => ({
+            label: key,
+            data: resultArray[index]
+        }));
+
+        var ctxCategory = document.getElementById('salesChartCategory').getContext('2d');
+        var chartCategory = new Chart(ctxCategory, {
+            type: 'bar',
+            data: {
+                datasets: jsonChart ,
+                labels: labelsCategory,
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: {
+                        stacked: true
+                    },
+                    y: {
+                        stacked: true
+                    }
+                }
+            }
+        });
+
+        document.getElementById("btnLastWeeksCategory").addEventListener("click", fetchTotalLastWeeksCategory);
+
+        // Écouteur de clic pour le bouton des 7 derniers jours
+        document.getElementById("btnLastDaysCategory").addEventListener("click", fetchTotalLastDaysCategory);
+
+        function fetchTotalLastWeeksCategory(){
+            document.getElementById('TextHisto2').innerHTML = "Histogramme du total des ventes par catégories des 5 dernières semaines";
+            fetch('/path/to/endpoint/last-weeks/category')
+                .then(response => response.json())
+                .then(data => {
+                    Chart.getChart("salesChartCategory").destroy();
+                    var labelsCategory = [];
+                    var totalsCategory = [];
+
+                    labelsCategory = Object.keys(data);
+                    totalsCategory = Object.values(data);
+
+                    const keys = Array.from(new Set(totalsCategory.flatMap(obj => Object.keys(obj))));
+
+                    const resultArray = keys.map(key => totalsCategory.map(obj => obj[key]));
+
+                    const resultJSON = {};
+
+                    const jsonChart = keys.map((key, index) => ({
+                        label: key,
+                        data: resultArray[index]
+                    }));
+
+                    // Création de l'histogramme avec Chart.js
+                    var ctxCategory = document.getElementById('salesChartCategory').getContext('2d');
+                    var chartCategory = new Chart(ctxCategory, {
+                        type: 'bar',
+                        data: {
+                            datasets: jsonChart ,
+                            labels: labelsCategory,
+                        },
+                        options: {
+                            responsive: true,
+                            scales: {
+                                x: {
+                                    stacked: true
+                                },
+                                y: {
+                                    stacked: true
+                                }
+                            }
+                        }
+                    });
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        }
+
+        function fetchTotalLastDaysCategory(){
+            document.getElementById('TextHisto2').innerHTML = "Histogramme du total des ventes par catégories des 7 derniers jours";
+            fetch('/path/to/endpoint/last-days/category')
+                .then(response => response.json())
+                .then(data => {
+                    Chart.getChart("salesChartCategory").destroy();
+                    var labelsCategory = [];
+                    var totalsCategory = [];
+
+                    labelsCategory = Object.keys(data);
+                    totalsCategory = Object.values(data);
+
+                    const keys = Array.from(new Set(totalsCategory.flatMap(obj => Object.keys(obj))));
+
+                    const resultArray = keys.map(key => totalsCategory.map(obj => obj[key]));
+
+                    const resultJSON = {};
+
+                    const jsonChart = keys.map((key, index) => ({
+                        label: key,
+                        data: resultArray[index]
+                    }));
+
+                    // Création de l'histogramme avec Chart.js
+                    var ctxCategory = document.getElementById('salesChartCategory').getContext('2d');
+                    var chartCategory = new Chart(ctxCategory, {
+                        type: 'bar',
+                        data: {
+                            datasets: jsonChart ,
+                            labels: labelsCategory,
+                        },
+                        options: {
+                            responsive: true,
+                            scales: {
+                                x: {
+                                    stacked: true
+                                },
+                                y: {
+                                    stacked: true
+                                }
+                            }
+                        }
+                    });
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        }
+
+    </script>
+
+{% endblock %}

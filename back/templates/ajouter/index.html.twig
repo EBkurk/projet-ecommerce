@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter index{% endblock %}
+
+{% block body %}
+    <h1>Ajouter index</h1>
+    <input type="hidden" id="NomObjet" value="Ajouter">
+    <input type="hidden" id="Url" value="{{ path('app_fetch_tableau') }}">
+    <table class="table sortable" id="MyTable">
+        <thead>
+            <tr>
+                <td class="no-sort colloneTable"><input id="checkboxAll" type="checkbox" onchange="selectAll(this)"></td>
+                <th>Id</th>
+                <th>Produit Id</th>
+                <th>Commande Id</th>
+                <th>Qte</th>
+                <th>Date</th>
+                <th class="no-sort">actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for ajouter in ajouters %}
+            <tr>
+                <td><input type="checkbox" onchange="selectOne()"></td>
+                <td>{{ ajouter.id }}</td>
+                <td>{{ ajouter.produit }}</td>
+                <td>{{ ajouter.commande }}</td>
+                <td>{{ ajouter.qte }}</td>
+                <td>{{ ajouter.date ? ajouter.date|date('Y-m-d') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_ajouter_show', {'id': ajouter.id}) }}">show</a>
+{#                    <a href="{{ path('app_ajouter_edit', {'id': ajouter.id}) }}">edit</a>#}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_ajouter_new') }}">Créer un nouveau</a>
+    <a href="{{ path('homepage') }}">Retour menu</a>
+    <button id="btn-delete-row" style="display: none" onclick="deleteRows()" class="btn btn-danger">Supprimer</button>
+{% endblock %}

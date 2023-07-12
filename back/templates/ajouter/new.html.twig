@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Ajouter{% endblock %}
+
+{% block body %}
+    <h1>Créer un nouveau Ajouter</h1>
+
+    {{ include('ajouter/_form.html.twig') }}
+
+    <a href="{{ path('app_ajouter_index') }}">retour a la liste</a>
+{% endblock %}

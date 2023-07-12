@@ -1,0 +1,5 @@
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button class="btn">{{ button_label|default('Créer') }}</button><br><br>
+    <a href="{{ path('app_categorie_new') }}">Créer une catégorie</a><br><br>
+{{ form_end(form) }}
