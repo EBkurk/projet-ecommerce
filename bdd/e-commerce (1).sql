@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mer. 12 juil. 2023 à 09:46
+-- Généré le : mer. 12 juil. 2023 à 16:03
 -- Version du serveur : 10.4.27-MariaDB
 -- Version de PHP : 8.2.0
 
@@ -67,7 +67,11 @@ CREATE TABLE `categorie` (
 --
 
 INSERT INTO `categorie` (`id`, `nom`) VALUES
-(6, 'test');
+(6, 'test'),
+(7, 'lit'),
+(8, 'canape'),
+(9, 'bureau'),
+(10, 'armoire');
 
 -- --------------------------------------------------------
 
@@ -135,6 +139,8 @@ CREATE TABLE `produit` (
   `prix` float NOT NULL,
   `stock` int(10) NOT NULL,
   `description` text NOT NULL,
+  `carousel` tinyint(1) NOT NULL DEFAULT 0,
+  `highlander` tinyint(1) NOT NULL DEFAULT 0,
   `categorie_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -142,8 +148,11 @@ CREATE TABLE `produit` (
 -- Déchargement des données de la table `produit`
 --
 
-INSERT INTO `produit` (`id`, `nom`, `prix`, `stock`, `description`, `categorie_id`) VALUES
-(6, 'test', 10, 10, 'test', 6);
+INSERT INTO `produit` (`id`, `nom`, `prix`, `stock`, `description`, `carousel`, `highlander`, `categorie_id`) VALUES
+(6, 'test', 10, 10, 'test', 1, 1, 6),
+(7, 'a', 11, 33, 'test2', 1, 0, 8),
+(8, 'b', 20, 66, 'test3', 1, 0, 9),
+(9, 'c', 5, 100, 'test4', 1, 1, 7);
 
 -- --------------------------------------------------------
 
@@ -253,7 +262,7 @@ ALTER TABLE `ajouter`
 -- AUTO_INCREMENT pour la table `categorie`
 --
 ALTER TABLE `categorie`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT pour la table `commande`
@@ -283,7 +292,7 @@ ALTER TABLE `materiaux`
 -- AUTO_INCREMENT pour la table `produit`
 --
 ALTER TABLE `produit`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT pour la table `utilisateur`

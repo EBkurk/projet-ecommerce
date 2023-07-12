@@ -1,7 +1,88 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Accueil{% endblock %}
 
-{% block body %}
-    <h1>Bienvenue sur le site</h1>
+{% block content %}
+    <h1>Bienvenue sur le site</h1><hr>
+    <h1></h1>
+    <div class="d-flex justify-content-center">
+        <div id="carouselIndicators" class="carousel slide" style="width: 450px;height: 300px" data-bs-ride="carousel" data-bs-interval="3000">
+        <!-- Indicateurs de la diapositive -->
+        <ol class="carousel-indicators">
+            {% set i=0 %}
+            {% for carousel in carousels %}
+                {% if i == 0 %}
+                    <li data-bs-target="#carouselIndicators" data-bs-slide-to={{ i }} class="active"></li>
+                {% else %}
+                    <li data-bs-target="#carouselIndicators" data-bs-slide-to={{ i }}></li>
+                {% endif %}
+                {% set i = i+1 %}
+            {% endfor %}
+        </ol>
+
+        <!-- Slides -->
+        <div class="carousel-inner" width="100px" height="100px">
+            {% set i=0 %}
+            {% for carousel in carousels %}
+                {% if i == 0 %}
+                    <div class="carousel-item active">
+                        <img src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" class="d-block w-100" alt={{ i }}>
+                    </div>
+                {% else %}
+                    <div class="carousel-item">
+                        <img src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" class="d-block w-100" alt={{ i }}>
+                    </div>
+                {% endif %}
+                {% set i = i+1 %}
+            {% endfor %}
+        </div>
+
+        <!-- Boutons de contrôle -->
+        <a class="carousel-control-prev" href="#carouselIndicators" role="button" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselIndicators" role="button" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </a>
+      </div>
+    </div>
+    <hr>
+    <div class="row mb-2">
+        <h1>Les catégories</h1>
+        {% for categories in category %}
+            <article class="col-4 mb-4">
+                <div class="card">
+                    <h2 class="card-header">
+                        {{ categories.nom }}
+                    </h2>
+                    <footer class="card-footer d-flex justify-content-between">
+                        <a href="{{ path('app_category', {'id': categories.id}) }}">Cliquer ici pour voir les produits</a>
+                    </footer>
+                </div>
+            </article>
+        {% endfor %}
+    </div>
+    <hr>
+    <div class="row">
+        <h1>Les Highlanders du moment</h1>
+        {% for produits in product %}
+            <article class="col-4 mb-4">
+                <div class="card">
+                    <h2 class="card-header">
+                        {{ produits.nom }}
+                    </h2>
+                    <div class="card-body article_contenu">
+                        {{ produits.description }}
+                    </div>
+                    <footer class="card-footer d-flex justify-content-between">
+                        <a href="{{ path('shop_index', {'id': produits.id}) }}">Cliquer ici pour voir le produit</a>
+                        <h5 class="mt-2">{{ produits.prix }} €</h5>
+                    </footer>
+                </div>
+            </article>
+        {% endfor %}
+    </div>
+
 {% endblock %}

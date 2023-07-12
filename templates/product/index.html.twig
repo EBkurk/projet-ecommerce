@@ -1,22 +1,23 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ProductController!{% endblock %}
+{% block title %}Produit{% endblock %}
 
-{% block body %}
+{% block content %}
 
-    <h1>Produits</h1>
-
-    {% for product in products %}
-
-        <h1>{{ product.nom }}</h1>
-        <strong>{{ product.prix}}</strong>
-        <p>
-            {{product.description}}
-        </p>
-
-        <hr>
-
-
-    {% endfor %}
+    <h3>{{ product.nom }}</h3><hr>
+    Description : <br>
+        {{ product.description }}<br><br>
+    Prix : {{ product.prix }} €<br>
+    {% if product.stock > 0 %}
+        Stock : {{ product.stock }}
+    {% else %}
+        <p>Il n'a plus de ce produit en stock</p>
+    {% endif %}
+    <br>
+    {{ form_start(form) }}
+        {{ form_widget(form.nombre) }}
+        {{ form_widget(form.submit) }}
+    {{ form_end(form) }}
+    {# <a class="btn btn-info">Acheter</a> #}
 
 {% endblock %}
