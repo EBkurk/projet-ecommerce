@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\User;
+use App\Entity\Utilisateur;
 use App\Form\RegistrationFormType;
 use App\Service\MailerService;
 use DateTime;
@@ -32,7 +32,7 @@ class RegistrationController extends FrontAbstractController
         MailerService $mailerService,
         TokenGeneratorInterface $tokenGeneratorInterface): Response
     {
-        $user = new User();
+        $user = new Utilisateur();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 

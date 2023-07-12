@@ -39,6 +39,18 @@ class ProduitRepository extends ServiceEntityRepository
         }
     }
 
+    public function findAllCarousel(): array
+    {
+        return $this->createQueryBuilder('p')
+            ->setMaxResults(3)
+            ->andWhere('p.carousel = :val')
+            ->setParameter('val', true)
+            ->orderBy('p.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
 //    /**
 //     * @return Produit[] Returns an array of Produit objects
 //     */
