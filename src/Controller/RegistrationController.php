@@ -23,7 +23,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 use function PHPUnit\Framework\throwException;
 
-class RegistrationController extends AbstractController
+class RegistrationController extends FrontAbstractController
 {
     #[Route('/inscription', name: 'app_register')]
     public function register(
