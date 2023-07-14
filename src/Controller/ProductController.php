@@ -19,7 +19,7 @@ class ProductController extends FrontAbstractController
 
         $choices = array_combine(range(1, $produit->getStock()), range(1, $produit->getStock()));
 
-        $form = $this->createFormBuilder()
+        $formStock = $this->createFormBuilder()
             ->add('nombre', ChoiceType::class, [
                 'choices' => $choices,
             ])
@@ -35,7 +35,7 @@ class ProductController extends FrontAbstractController
 
         return $this->render('product/index.html.twig', [
             'product' => $produit,
-            'form' => $form,
+            'formStock' => $formStock,
             'similaires' => $similar,
         ]);
     }
