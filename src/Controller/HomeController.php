@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Form\SearchType;
 use Doctrine\DBAL\Connection;
+use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -11,9 +12,13 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends FrontAbstractController
 {
 
-    private function findBySearch(Connection $connection, $form, $session){
+    private function findBySearch(Connection $connection, Form $form, $session){
         if($form->isSubmitted() && $form->isValid()){
             $data = $form->getData();
+            if($form->get('ReniSearch')->isClicked()){
+                $session->remove('search');
+                return 0;
+            }
             $session->set('search', $data);
         }else if($session->get('search') != null){
             $data = $session->get('search');
@@ -84,6 +89,11 @@ class HomeController extends FrontAbstractController
             $where = " AND";
             $i++;
         }
+        $sql.=$where." highlander = 1";
+        if($data['trie'] != null){
+            $sql.=" ORDER BY ".$data['trie']." ".$data['trieSens'];
+            $i++;
+        }
         if($i == 0 && $session->get('search') != null){
             $session->remove('search');
         }
@@ -126,6 +136,14 @@ class HomeController extends FrontAbstractController
         $product = $this->findBySearch($connection, $form, $session);
         if($product == -1){
             $product = $this->produitRepository->findBy(['highlander' => 1]);
+        }else if($product == 0){
+            $product = $this->produitRepository->findBy(['highlander' => 1]);
+            $form = $this->createForm(SearchType::class,null,[
+                'isCategory' => true,
+                'options' => $session->get('search'),
+                'listMateriaux' => $materiaux,
+                'categori' => $categori,
+            ]);
         }
 
         $carousel = $this->produitRepository->findAllCarousel();

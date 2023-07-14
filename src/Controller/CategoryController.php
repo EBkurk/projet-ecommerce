@@ -15,6 +15,10 @@ class CategoryController extends FrontAbstractController
     private function findBySearch(Connection $connection, $form, Categorie $categorie, $session){
         if($form->isSubmitted() && $form->isValid()){
             $data = $form->getData();
+            if($form->get('ReniSearch')->isClicked()){
+                $session->remove('search');
+                return 0;
+            }
             $session->set('search', $data);
         }else if($session->get('search') != null){
             $data = $session->get('search');
@@ -79,10 +83,14 @@ class CategoryController extends FrontAbstractController
                 $where = " AND";
                 $i++;
             }
+            $sql.=$where." categorie_id = ".$categorie->getId();
+            if($data['trie'] != null){
+                $sql.=" ORDER BY ".$data['trie']." ".$data['trieSens'];
+                $i++;
+            }
             if($i == 0 && $session->get('search') != null){
                 $session->remove('search');
             }
-            $sql.=$where." categorie_id = ".$categorie->getId();
             $stmt = $connection->prepare($sql);
             $product = $stmt->executeQuery();
             $product = $product->fetchAllAssociative();
@@ -116,6 +124,13 @@ class CategoryController extends FrontAbstractController
         $product = $this->findBySearch($connection, $form, $categorie, $session);
         if($product == -1) {
             $product = $this->produitRepository->findBy(['categorie' => $categorie]);
+        }else if($product == 0){
+            $product = $this->produitRepository->findBy(['categorie' => $categorie]);
+            $form = $this->createForm(SearchType::class,null,[
+                'isCategory' => true,
+                'options' => $session->get('search'),
+                'listMateriaux' => $materiaux,
+            ]);
         }
 
         return $this->render('category/index.html.twig', [

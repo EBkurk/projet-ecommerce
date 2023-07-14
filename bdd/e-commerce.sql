@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mer. 12 juil. 2023 à 16:03
+-- Généré le : ven. 14 juil. 2023 à 15:43
 -- Version du serveur : 10.4.27-MariaDB
 -- Version de PHP : 8.2.0
 
@@ -97,6 +97,15 @@ CREATE TABLE `compose` (
   `produit_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Déchargement des données de la table `compose`
+--
+
+INSERT INTO `compose` (`id`, `materiaux_id`, `produit_id`) VALUES
+(1, 4, 6),
+(2, 5, 6),
+(3, 6, 6);
+
 -- --------------------------------------------------------
 
 --
@@ -125,7 +134,9 @@ CREATE TABLE `materiaux` (
 --
 
 INSERT INTO `materiaux` (`id`, `nom`) VALUES
-(4, 'future');
+(4, 'future'),
+(5, 'test'),
+(6, 'p');
 
 -- --------------------------------------------------------
 
@@ -141,6 +152,7 @@ CREATE TABLE `produit` (
   `description` text NOT NULL,
   `carousel` tinyint(1) NOT NULL DEFAULT 0,
   `highlander` tinyint(1) NOT NULL DEFAULT 0,
+  `arriver` date NOT NULL DEFAULT current_timestamp(),
   `categorie_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -148,11 +160,20 @@ CREATE TABLE `produit` (
 -- Déchargement des données de la table `produit`
 --
 
-INSERT INTO `produit` (`id`, `nom`, `prix`, `stock`, `description`, `carousel`, `highlander`, `categorie_id`) VALUES
-(6, 'test', 10, 10, 'test', 1, 1, 6),
-(7, 'a', 11, 33, 'test2', 1, 0, 8),
-(8, 'b', 20, 66, 'test3', 1, 0, 9),
-(9, 'c', 5, 100, 'test4', 1, 1, 7);
+INSERT INTO `produit` (`id`, `nom`, `prix`, `stock`, `description`, `carousel`, `highlander`, `arriver`, `categorie_id`) VALUES
+(6, 'test', 10, 10, 'test', 1, 1, '2023-07-13', 6),
+(7, 'a', 11, 33, 'test2', 1, 0, '2023-07-14', 8),
+(8, 'b', 20, 66, 'test3', 1, 0, '2023-07-14', 9),
+(9, 'c', 5, 100, 'test4', 1, 1, '2023-07-14', 7),
+(10, 'd', 1, 1, 'test5', 0, 0, '2023-07-14', 6),
+(11, 'e', 2, 4, 'etts', 0, 0, '2023-07-14', 6),
+(12, 'f', 3, 2, 'dq', 0, 0, '2023-07-14', 6),
+(13, 'g', 45, 6, 'getrh', 0, 0, '2023-07-14', 6),
+(14, 'h', 6, 9, 'ytj', 0, 0, '2023-07-14', 6),
+(15, 'i', 7, 7, 'edr', 0, 0, '2023-07-14', 6),
+(16, 'j', 8, 3, 'q', 0, 0, '2023-07-14', 6),
+(17, 'efs', 5, 5, 'jhgfds', 0, 0, '2023-07-14', 6),
+(18, 're', 5, 0, 're', 0, 1, '2023-07-15', 10);
 
 -- --------------------------------------------------------
 
@@ -274,7 +295,7 @@ ALTER TABLE `commande`
 -- AUTO_INCREMENT pour la table `compose`
 --
 ALTER TABLE `compose`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT pour la table `image`
@@ -286,13 +307,13 @@ ALTER TABLE `image`
 -- AUTO_INCREMENT pour la table `materiaux`
 --
 ALTER TABLE `materiaux`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT pour la table `produit`
 --
 ALTER TABLE `produit`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT pour la table `utilisateur`
@@ -327,8 +348,8 @@ ALTER TABLE `commande`
 -- Contraintes pour la table `compose`
 --
 ALTER TABLE `compose`
-  ADD CONSTRAINT `cle_materiaux` FOREIGN KEY (`materiaux_id`) REFERENCES `materiaux` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `cle_produi` FOREIGN KEY (`produit_id`) REFERENCES `produit` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `cle_materiaux` FOREIGN KEY (`materiaux_id`) REFERENCES `materiaux` (`id`),
+  ADD CONSTRAINT `cle_produi` FOREIGN KEY (`produit_id`) REFERENCES `produit` (`id`);
 
 --
 -- Contraintes pour la table `produit`

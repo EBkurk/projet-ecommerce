@@ -12,6 +12,8 @@ use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class SearchType extends AbstractType
@@ -42,10 +44,7 @@ class SearchType extends AbstractType
                 ->add('titre', TextType::class,[
                     'required' => false,
                 ]);
-            dump($options);
-            dump($options['isCategory']);
             if($options['isCategory'] == true){
-                dump($options['isCategory']);
                 $builder
                     ->add('category', EntityType::class,[
                         'class' => Categorie::class,
@@ -68,7 +67,20 @@ class SearchType extends AbstractType
                 ->add('stock', CheckboxType::class,[
                     'required' => false,
                 ])
-                ->add('submitSearch', SubmitType::class, ['label' => 'Chercher'])
+                ->add('trie', ChoiceType::class, [
+                    'required' => false,
+                    'choices' => [
+                        'Prix' => 'produit.prix',
+                        'Nouveauté' => 'produit.arriver',
+                        'Stock' => 'produit.stock',
+                    ]
+                ])
+                ->add('trieSens', ChoiceType::class, [
+                    'choices' => [
+                        'Ascendant' => 'ASC',
+                        'Descendant' => 'DESC',
+                    ]
+                ])
             ;
         }else{
             $builder
@@ -105,9 +117,7 @@ class SearchType extends AbstractType
                             'required' => false,
                             'data' => $options['categori'],
                         ]);
-                    dump('test');
             }
-            dump($options['options']['materiaux']);
             $builder
                 ->add('materiaux', EntityType::class,[
                     'class' => Materiaux::class,
@@ -115,7 +125,6 @@ class SearchType extends AbstractType
                     'expanded' => true,
                     'required' => false,
                     'data' => $options['listMateriaux'],
-//                    'data' => $options['options']['materiaux'],
                 ])
                 ->add('prix_min', NumberType::class,[
                     'required' => false,
@@ -129,10 +138,34 @@ class SearchType extends AbstractType
                     'required' => false,
                     'data' => $options['options']['stock'],
                 ])
-                ->add('submitSearch', SubmitType::class, ['label' => 'Chercher'])
+                ->add('trie', ChoiceType::class, [
+                    'required' => false,
+                    'choices' => [
+                        'Prix' => 'produit.prix',
+                        'Nouveauté' => 'produit.arriver',
+                        'Stock' => 'produit.stock',
+                    ],
+                    'data' => $options['options']['trie'],
+                ])
+                ->add('trieSens', ChoiceType::class, [
+                    'choices' => [
+                        'Ascendant' => 'ASC',
+                        'Descendant' => 'DESC',
+                    ],
+                    'data' => $options['options']['trieSens'],
+                ])
             ;
         }
-
+        $builder
+            ->add('submitSearch', SubmitType::class, [
+                'label' => 'Chercher',
+                'attr' => ['value' => 'save'],
+            ])
+            ->add('ReniSearch', SubmitType::class, [
+                'label' => 'Rénitialiser',
+                'attr' => ['value' => 'test'],
+            ])
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
