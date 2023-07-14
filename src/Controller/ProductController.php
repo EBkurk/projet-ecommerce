@@ -19,12 +19,25 @@ class ProductController extends FrontAbstractController
 
         $choices = array_combine(range(1, $produit->getStock()), range(1, $produit->getStock()));
 
-        $formStock = $this->createFormBuilder()
-            ->add('nombre', ChoiceType::class, [
+        if($produit->getStock() != 0){
+            $formStock = $this->createFormBuilder()
+                ->add('nombre', ChoiceType::class, [
                 'choices' => $choices,
             ])
-            ->add('submit', SubmitType::class, ['label' => '“AJOUTER AU PANIER'])
-            ->getForm()->createView();
+                ->add('submit', SubmitType::class, ['label' => 'AJOUTER AU PANIER'])
+                ->getForm();
+
+            $formStock->handleRequest($request);
+
+            if($formStock->isSubmitted() && $formStock->isValid()){
+                $data = $formStock->getData();
+                dd($data);
+
+            }
+            $formStock = $formStock->createView();
+        }else {
+            $formStock = null;
+        }
 
         $sql="SELECT * FROM produit where categorie_id = :cat and id != :id order by RAND() limit 6";
         $stmt = $connection->prepare($sql);
@@ -33,10 +46,15 @@ class ProductController extends FrontAbstractController
         $similar = $stmt->executeQuery();
         $similar = $similar->fetchAllAssociative();
 
+        $compose = $this->composeRepository->findBy(['produit' => $produit->getId()]);
+        $image = $this->imageRepository->findBy(['produit' => $produit->getId()]);
+
         return $this->render('product/index.html.twig', [
             'product' => $produit,
             'formStock' => $formStock,
             'similaires' => $similar,
+            'compose' => $compose,
+            'images' => $image
         ]);
     }
 }
