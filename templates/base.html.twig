@@ -64,8 +64,14 @@
                 <div class="search">
                     Uniquement en stock : {{ form_widget(form.stock) }}<br>
                 </div>
+                <hr>
+                <div class="search">
+                    Trier par : {{ form_widget(form.trie) }}
+                    {{ form_widget(form.trieSens) }}
+                </div>
                 <div class="search">
                     {{ form_widget(form.submitSearch) }}
+                    {{ form_widget(form.ReniSearch) }}
                 </div>
             {{ form_end(form) }}
         {% endif %}
