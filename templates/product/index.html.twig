@@ -14,10 +14,10 @@
         <p>STOCK ÉPUISÉ</p>
     {% endif %}
     <br>
-    {{ form_start(form) }}
-        {{ form_widget(form.nombre) }}
-        {{ form_widget(form.submit) }}
-    {{ form_end(form) }}<hr>
+    {{ form_start(formStock) }}
+        {{ form_widget(formStock.nombre) }}
+        {{ form_widget(formStock.submit) }}
+    {{ form_end(formStock) }}<hr>
 
     <div class="row">
         <h1>Similaires</h1>
