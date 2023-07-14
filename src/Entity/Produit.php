@@ -55,6 +55,9 @@ class Produit
     #[ORM\Column]
     private ?bool $highlander = null;
 
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    private ?\DateTimeInterface $arriver = null;
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
@@ -292,6 +295,18 @@ class Produit
     public function setHighlander(bool $highlander): static
     {
         $this->highlander = $highlander;
+
+        return $this;
+    }
+
+    public function getArriver(): ?\DateTimeInterface
+    {
+        return $this->arriver;
+    }
+
+    public function setArriver(\DateTimeInterface $arriver): static
+    {
+        $this->arriver = $arriver;
 
         return $this;
     }
