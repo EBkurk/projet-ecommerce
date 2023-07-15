@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Image;
 use App\Form\ImageType;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -26,7 +28,21 @@ class ImageController extends BackAbstractController
         $form = $this->createForm(ImageType::class, $image);
         $form->handleRequest($request);
 
+        if($form->isSubmitted()){
+            $allowedExtensions = ['jpg', 'jpeg', 'png'];
+            $file = $form['url']->getData();
+            $originalExtension = $file->getClientOriginalExtension();
+            if (!in_array($originalExtension, $allowedExtensions)) {
+                $form->get('url')->addError(new FormError("L'image doit avoir comme extension jpg, png ou jpeg"));
+            }
+        }
         if ($form->isSubmitted() && $form->isValid()) {
+            $fileSystem = new Filesystem();
+            $fileName = rand(1, 999999999).'.jpg';
+            $fileSystem->copy($file->getPathname(), 'images/' . $fileName);
+            $file->move('../../public/images', $fileName);
+            $image->setUrl('images/'.$fileName);
+
             $this->imageRepository->save($image, true);
 
             return $this->redirectToRoute('app_image_index', [], Response::HTTP_SEE_OTHER);
@@ -49,10 +65,28 @@ class ImageController extends BackAbstractController
     #[Route('/{id}/edit', name: 'app_image_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Image $image): Response
     {
+        $oldFile = $image->getUrl();
         $form = $this->createForm(ImageType::class, $image);
         $form->handleRequest($request);
 
+        if($form->isSubmitted()){
+            $allowedExtensions = ['jpg', 'jpeg', 'png'];
+            $file = $form['url']->getData();
+            $originalExtension = $file->getClientOriginalExtension();
+            if (!in_array($originalExtension, $allowedExtensions)) {
+                $form->get('url')->addError(new FormError("L'image doit avoir comme extension jpg, png ou jpeg"));
+            }
+        }
         if ($form->isSubmitted() && $form->isValid()) {
+            unlink($oldFile);
+            unlink('../../public/'.$oldFile);
+            $fileSystem = new Filesystem();
+            $file = $form['url']->getData();
+            $fileName = rand(1, 999999999).'.jpg';
+            $fileSystem->copy($file->getPathname(), 'images/' . $fileName);
+            $file->move('../../public/images', $fileName);
+            $image->setUrl('images/'.$fileName);
+
             $this->imageRepository->save($image, true);
 
             return $this->redirectToRoute('app_image_index', [], Response::HTTP_SEE_OTHER);
@@ -68,6 +102,8 @@ class ImageController extends BackAbstractController
     public function delete(Request $request, Image $image): Response
     {
         if ($this->isCsrfTokenValid('delete'.$image->getId(), $request->request->get('_token'))) {
+            unlink($image->getUrl());
+            unlink('../../public/'.$image->getUrl());
             $this->imageRepository->remove($image, true);
         }
 

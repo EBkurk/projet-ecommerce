@@ -12,6 +12,7 @@
                 <td class="no-sort colloneTable"><input id="checkboxAll" type="checkbox" onchange="selectAll(this)"></td>
                 <th>Id</th>
                 <th>Url</th>
+                <td class="no-sort imageCollumn">Image</td>
                 <th class="no-sort">actions</th>
             </tr>
         </thead>
@@ -21,6 +22,7 @@
                 <td><input type="checkbox" onchange="selectOne()"></td>
                 <td>{{ image.id }}</td>
                 <td>{{ image.url }}</td>
+                <td><img class="imageIndex" src="{{ asset( image.url ) }}"></td>
                 <td>
                     <a href="{{ path('app_image_show', {'id': image.id}) }}">show</a>
                     <a href="{{ path('app_image_edit', {'id': image.id}) }}">edit</a>
