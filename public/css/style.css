@@ -69,3 +69,18 @@
     margin-left: 100px;
     overflow: hidden;
 }
+
+#contact_form_objet {
+    width: 700px;
+    margin-right: 50px;
+}
+
+#contact_form_mail {
+    width: 700px;
+    height: 500px;
+    margin-left: 50px;
+}
+
+.mail {
+    margin-top: 20px;
+}
