@@ -159,11 +159,9 @@ class SearchType extends AbstractType
         $builder
             ->add('submitSearch', SubmitType::class, [
                 'label' => 'Chercher',
-                'attr' => ['value' => 'save'],
             ])
             ->add('ReniSearch', SubmitType::class, [
                 'label' => 'Rénitialiser',
-                'attr' => ['value' => 'test'],
             ])
         ;
     }
