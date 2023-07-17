@@ -87,6 +87,8 @@ class CategoryController extends FrontAbstractController
             if($data['trie'] != null){
                 $sql.=" ORDER BY ".$data['trie']." ".$data['trieSens'];
                 $i++;
+            }else{
+                $sql.=" ORDER BY produit.prioriter ASC and produit.stock ASC";
             }
             if($i == 0 && $session->get('search') != null){
                 $session->remove('search');
@@ -123,8 +125,16 @@ class CategoryController extends FrontAbstractController
 
         $product = $this->findBySearch($connection, $form, $categorie, $session);
         if($product == -1) {
-            $product = $this->produitRepository->findBy(['categorie' => $categorie]);
+            //$product = $this->produitRepository->findProductByCategorie($categorie);
+            $product = $this->produitRepository->createQueryBuilder('p')
+                ->andWhere('p.categorie = :val')
+                ->setParameter('val', $categorie)
+                ->orderBy('p.prioriter', 'ASC')
+                ->addOrderBy('p.stock','DESC')
+                ->getQuery()
+                ->getResult();
         }else if($product == 0){
+            //$product = $this->produitRepository->findProductByCategorie($categorie);
             $product = $this->produitRepository->findBy(['categorie' => $categorie]);
             $form = $this->createForm(SearchType::class,null,[
                 'isCategory' => true,

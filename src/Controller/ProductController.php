@@ -32,9 +32,9 @@ class ProductController extends FrontAbstractController
 
             if($formStock->isSubmitted() && $formStock->isValid()){
                 $data = $formStock->getData();
-                //dd($request->getSession()->get('cart'));
                 $this->addToCart($cartService, $produit->getId(), $data['nombre']);
-
+                $produit->setStock($produit->getStock() - $data['nombre']);
+                $this->produitRepository->save($produit, true);
             }
             $formStock = $formStock->createView();
         }else {

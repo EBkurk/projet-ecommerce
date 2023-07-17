@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\MailRepository;
 use App\Service\CartService;
 use Doctrine\DBAL\Connection;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -28,12 +29,13 @@ class FrontAbstractController extends AbstractController
     protected $utilisateurRepository;
     protected $ajouterRepository;
     protected $composeRepository;
+    protected $mailRepository;
 
     public function __construct(AdresseRepository $adresseRepository, CommandeRepository $commandeRepository,
                                 ImageRepository $imageRepository, CategorieRepository $categorieRepository,
                                 MateriauxRepository $materiauxRepository, ProduitRepository $produitRepository,
                                 UtilisateurRepository $utilisateurRepository, AjouterRepository $ajouterRepository,
-                                ComposeRepository $composeRepository)
+                                ComposeRepository $composeRepository, MailRepository $mailRepository)
     {
         $this->adresseRepository = $adresseRepository;
         $this->commandeRepository = $commandeRepository;
@@ -44,6 +46,7 @@ class FrontAbstractController extends AbstractController
         $this->utilisateurRepository = $utilisateurRepository;
         $this->ajouterRepository = $ajouterRepository;
         $this->composeRepository = $composeRepository;
+        $this->mailRepository = $mailRepository;
     }
 
     #[Route('/mon-panier/add/{id<\d+>}', name: 'cart_add')]

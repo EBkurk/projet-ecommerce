@@ -58,6 +58,9 @@ class Produit
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $arriver = null;
 
+    #[ORM\Column]
+    private ?int $prioriter = null;
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
@@ -307,6 +310,18 @@ class Produit
     public function setArriver(\DateTimeInterface $arriver): static
     {
         $this->arriver = $arriver;
+
+        return $this;
+    }
+
+    public function getPrioriter(): ?int
+    {
+        return $this->prioriter;
+    }
+
+    public function setPrioriter(int $prioriter): static
+    {
+        $this->prioriter = $prioriter;
 
         return $this;
     }
