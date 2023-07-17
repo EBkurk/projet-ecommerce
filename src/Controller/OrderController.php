@@ -12,13 +12,13 @@ class OrderController extends FrontAbstractController
     public function index(): Response
     {
         if (!$this->getUser()){
-            return $this->redirectToRoute(route'/connexion');
+            return $this->redirectToRoute('app_login');
 
         }
 
-        $form = $this->createForm(type: OrderType::class, data: null, ['user' =>$this->getUser()]);
+        //$form = $this->createForm(type: OrderType::class, data: null, ['user' => $this->getUser()]);
     
 
-    return $this->render(view 'order/index', ['controller_name' => 'OrderController']);
+        return $this->render( 'order/index.html.twig', ['controller_name' => 'OrderController']);
     }
 }

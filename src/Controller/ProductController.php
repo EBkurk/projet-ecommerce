@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Service\CartService;
 use Doctrine\DBAL\Connection;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -13,7 +14,7 @@ class ProductController extends FrontAbstractController
 {
 
     #[Route('/{id}/boutique', name: 'shop_index')]
-    public function index(Request $request, Connection $connection): Response
+    public function index(Request $request, Connection $connection, CartService $cartService): Response
     {
         $produit = $this->produitRepository->find($request->attributes->get('id'));
 
@@ -31,7 +32,8 @@ class ProductController extends FrontAbstractController
 
             if($formStock->isSubmitted() && $formStock->isValid()){
                 $data = $formStock->getData();
-                dd($data);
+                //dd($request->getSession()->get('cart'));
+                $this->addToCart($cartService, $produit->getId(), $data['nombre']);
 
             }
             $formStock = $formStock->createView();

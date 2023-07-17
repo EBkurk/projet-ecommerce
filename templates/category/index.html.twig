@@ -13,7 +13,9 @@
                         {{ produits.nom }}
                     </h2>
                     <div class="card-img article_contenu">
-                        <img class="imageCart" src="{{ asset(produits.images[0].url) }}"/>
+                        {% if produits.images[0].url is defined %}
+                            <img class="imageCart" src="{{ asset(produits.images[0].url) }}"/>
+                        {% endif %}
                     </div>
                     <hr>
                     <div class="card-body article_contenu">
