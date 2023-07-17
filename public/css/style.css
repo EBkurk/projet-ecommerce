@@ -84,3 +84,30 @@
 .mail {
     margin-top: 20px;
 }
+
+.imageCarousel {
+    height: 300px;
+}
+
+.imageCart {
+    height: 300px;
+    overflow: hidden;
+    margin-top: 10px;
+    margin-right: auto;
+    margin-left: auto;
+    display: block;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+body {
+    margin-bottom: 60px;
+}
+
+#footerSite {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
