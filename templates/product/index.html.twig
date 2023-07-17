@@ -13,7 +13,7 @@
             {{ product.description }}<br><br>
             Prix : {{ product.prix }} €<br>
             {% if product.stock > 0 %}
-                Stock : {{ product.stock }}
+                Stock : {{ product.stock }} produit(s)
             {% else %}
                 <p>STOCK ÉPUISÉ</p>
             {% endif %}
@@ -51,16 +51,16 @@
                 </ol>
 
                 <!-- Slides -->
-                <div class="carousel-inner" width="100px" height="100px">
+                <div class="carousel-inner">
                     {% set i=0 %}
                     {% for carousel in images %}
                         {% if i == 0 %}
                             <div class="carousel-item active">
-                                <img src="{{ asset(carousel.url) }}" class="d-block w-100" alt={{ i }}>
+                                <img src="{{ asset(carousel.url) }}" class="d-block w-100 imageCarousel" alt={{ i }}>
                             </div>
                         {% else %}
                             <div class="carousel-item">
-                                <img src="{{ asset(carousel.url) }}" class="d-block w-100" alt={{ i }}>
+                                <img src="{{ asset(carousel.url) }}" class="d-block w-100 imageCarousel" alt={{ i }}>
                             </div>
                         {% endif %}
                         {% set i = i+1 %}

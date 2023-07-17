@@ -12,8 +12,18 @@
                     <h2 class="card-header">
                         {{ produits.nom }}
                     </h2>
+                    <div class="card-img article_contenu">
+                        <img class="imageCart" src="{{ asset(produits.images[0].url) }}"/>
+                    </div>
+                    <hr>
                     <div class="card-body article_contenu">
                         {{ produits.description }}
+                        <hr>
+                        {% if produits.stock > 0 %}
+                            Stock : {{ produits.stock }} produit(s)
+                        {% else %}
+                            STOCK ÉPUISÉ
+                        {% endif %}
                     </div>
                     <footer class="card-footer d-flex justify-content-between">
                         <a href="{{ path('shop_index', {'id': produits.id}) }}">Cliquer ici pour voir le produit</a>
