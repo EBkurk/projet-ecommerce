@@ -48,6 +48,13 @@ class CartService
         $this->getSession()->set('cart', $cart);
     }
 
+    public function increase(int $id)
+    {
+        $cart = $this->getSession()->get('cart', []);
+            $cart[$id]++;
+        $this->getSession()->set('cart', $cart);
+    }
+
     public function revoveCartAll()
     {
         return $this->getSession()->remove('cart');

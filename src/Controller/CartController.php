@@ -48,6 +48,14 @@ class CartController extends FrontAbstractController
         return $this->redirectToRoute('cart_index');
     }
 
+    #[Route('/mon-panier/increase/{id<\d+>}', name: 'cart_increase')]
+    public function increase(CartService $cartService, $id): RedirectResponse
+    {
+        $cartService->increase($id);
+
+        return $this->redirectToRoute('cart_index');
+    }
+
     #[Route('/mon-panier/removeAll', name: 'cart_removeAll')]
     public function removeAll(CartService $cartService): Response
     {

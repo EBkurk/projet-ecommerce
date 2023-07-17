@@ -23,13 +23,13 @@
                                         <p class="mb-2">{{ item.product.description }}</p>
                                     </div>
                                     <div class="text-end ms-auto">
-                                        <div class="fs-5 mb-2">{{ (total  /  100)|number_format(2, ',', '.') }} €</div>
+                                        <div class="fs-5 mb-2">{{ item.product.prix * item.quantity }} €</div>
                                     </div>
                                 </div>
                                     <div class="count-input ms-n3">
                                         <a href="{{ path('cart_decrease', {id: item.product.id}) }}" class="btn btn-icon fs-xl" data-decrement>-</a>
                                         <input class="form-control" type="number" value="{{ item.quantity }}" readonly>
-                                        <a href="{{ path('cart_add', {id: item.product.id}) }}" class="btn btn-icon fs-xl" data-increment>+</a>
+                                        <a href="{{ path('cart_increase', {id: item.product.id}) }}" class="btn btn-icon fs-xl" data-increment>+</a>
                                     </div>
                                     <div class="nav justify-content-end mt-n5 mt-sm-n3">
                                         <a class="nav-link fs-xl p-2" href="{{ path('cart_remove', {id: item.product.id}) }}" data-bs-toggle="tooltip" title="Remove">
