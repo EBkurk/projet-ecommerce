@@ -43,6 +43,9 @@ class CartController extends FrontAbstractController
     #[Route('/mon-panier/decrease/{id<\d+>}', name: 'cart_decrease')]
     public function decrease(CartService $cartService, $id): RedirectResponse
     {
+        $produit = $this->produitRepository->find($id);
+        $produit->setStock($produit->getStock() + 1);
+        $this->produitRepository->save($produit, true);
         $cartService->decrease($id);
 
         return $this->redirectToRoute('cart_index');
@@ -51,6 +54,9 @@ class CartController extends FrontAbstractController
     #[Route('/mon-panier/increase/{id<\d+>}', name: 'cart_increase')]
     public function increase(CartService $cartService, $id): RedirectResponse
     {
+        $produit = $this->produitRepository->find($id);
+        $produit->setStock($produit->getStock() - 1);
+        $this->produitRepository->save($produit, true);
         $cartService->increase($id);
 
         return $this->redirectToRoute('cart_index');

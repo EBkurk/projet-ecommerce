@@ -49,6 +49,18 @@ class Produit
     #[ORM\OneToMany(mappedBy: 'produit', targetEntity: Compose::class)]
     private Collection $composes;
 
+    #[ORM\Column]
+    private ?bool $carousel = null;
+
+    #[ORM\Column]
+    private ?bool $highlander = null;
+
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    private ?\DateTimeInterface $arriver = null;
+
+    #[ORM\Column]
+    private ?int $prioriter = null;
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
@@ -262,6 +274,54 @@ class Produit
                 $compose->setProduit(null);
             }
         }
+
+        return $this;
+    }
+
+    public function isCarousel(): ?bool
+    {
+        return $this->carousel;
+    }
+
+    public function setCarousel(bool $carousel): static
+    {
+        $this->carousel = $carousel;
+
+        return $this;
+    }
+
+    public function isHighlander(): ?bool
+    {
+        return $this->highlander;
+    }
+
+    public function setHighlander(bool $highlander): static
+    {
+        $this->highlander = $highlander;
+
+        return $this;
+    }
+
+    public function getArriver(): ?\DateTimeInterface
+    {
+        return $this->arriver;
+    }
+
+    public function setArriver(\DateTimeInterface $arriver): static
+    {
+        $this->arriver = $arriver;
+
+        return $this;
+    }
+
+    public function getPrioriter(): ?int
+    {
+        return $this->prioriter;
+    }
+
+    public function setPrioriter(int $prioriter): static
+    {
+        $this->prioriter = $prioriter;
 
         return $this;
     }

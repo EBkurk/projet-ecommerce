@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends FrontAbstractController
 {
 
-    private function findBySearch(Connection $connection, Form $form, $session){
+    private function findBySearch(Connection $connection, $form, $session){
         if($form->isSubmitted() && $form->isValid()){
             $data = $form->getData();
             if($form->get('ReniSearch')->isClicked()){
@@ -93,6 +93,8 @@ class HomeController extends FrontAbstractController
         if($data['trie'] != null){
             $sql.=" ORDER BY ".$data['trie']." ".$data['trieSens'];
             $i++;
+        }else{
+            $sql.=" ORDER BY produit.prioriter ASC and produit.stock ASC";
         }
         if($i == 0 && $session->get('search') != null){
             $session->remove('search');
@@ -136,8 +138,10 @@ class HomeController extends FrontAbstractController
         $product = $this->findBySearch($connection, $form, $session);
         if($product == -1){
             $product = $this->produitRepository->findBy(['highlander' => 1]);
+            //$product = $this->produitRepository->findProductByHighlander();
         }else if($product == 0){
             $product = $this->produitRepository->findBy(['highlander' => 1]);
+            //$product = $this->produitRepository->findProductByHighlander();
             $form = $this->createForm(SearchType::class,null,[
                 'isCategory' => true,
                 'options' => $session->get('search'),

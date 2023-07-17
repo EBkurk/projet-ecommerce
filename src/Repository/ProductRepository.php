@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Categorie;
 use App\Entity\Product;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -37,6 +38,28 @@ class ProductRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    public function findProductByCategorie(Categorie $categorie)
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.categorie = :val')
+            ->setParameter('val', $categorie)
+            ->orderBy('p.prioriter', 'ASC')
+            ->addOrderBy('p.stock','DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findProductByHighlander()
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.highlander = :val')
+            ->setParameter('val', 1)
+            ->orderBy('p.prioriter', 'ASC')
+            ->addOrderBy('p.stock','DESC')
+            ->getQuery()
+            ->getResult();
     }
 
 //    /**
