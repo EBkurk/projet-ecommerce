@@ -37,8 +37,9 @@ class ImageController extends BackAbstractController
             }
         }
         if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
             $fileSystem = new Filesystem();
-            $fileName = rand(1, 999999999).'.jpg';
+            $fileName = rand(1, 999999999).'.'.$file->getClientOriginalExtension();
             $fileSystem->copy($file->getPathname(), 'images/' . $fileName);
             $file->move('../../public/images', $fileName);
             $image->setUrl('images/'.$fileName);
@@ -78,11 +79,12 @@ class ImageController extends BackAbstractController
             }
         }
         if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
             unlink($oldFile);
             unlink('../../public/'.$oldFile);
             $fileSystem = new Filesystem();
             $file = $form['url']->getData();
-            $fileName = rand(1, 999999999).'.jpg';
+            $fileName = rand(1, 999999999).'.'.$file->getClientOriginalExtension();
             $fileSystem->copy($file->getPathname(), 'images/' . $fileName);
             $file->move('../../public/images', $fileName);
             $image->setUrl('images/'.$fileName);

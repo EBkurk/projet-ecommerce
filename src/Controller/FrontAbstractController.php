@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Service\CartService;
 use Doctrine\DBAL\Connection;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Repository\AdresseRepository;
@@ -13,6 +14,8 @@ use App\Repository\ImageRepository;
 use App\Repository\MateriauxRepository;
 use App\Repository\ProduitRepository;
 use App\Repository\UtilisateurRepository;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
 class FrontAbstractController extends AbstractController
 {
@@ -41,5 +44,13 @@ class FrontAbstractController extends AbstractController
         $this->utilisateurRepository = $utilisateurRepository;
         $this->ajouterRepository = $ajouterRepository;
         $this->composeRepository = $composeRepository;
+    }
+
+    #[Route('/mon-panier/add/{id<\d+>}', name: 'cart_add')]
+    public function addToCart(CartService $cartService, int $id, int $quantity): Response
+    {
+        $cartService->addToCart($id, $quantity);
+
+        return $this->redirectToRoute('cart_index');
     }
 }

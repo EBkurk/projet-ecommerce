@@ -4,27 +4,32 @@ namespace App\Controller;
 
 use App\Entity\Product;
 use App\Service\CartService;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class CartController extends AbstractController
+class CartController extends FrontAbstractController
 {
     #[Route('/mon-panier', name: 'cart_index')]
-    public function index(CartService $cartService): Response
+    public function index(CartService $cartService, Request $request): Response
     {
+        $panier = [];
+        $i=0;
+        foreach ($request->getSession()->get('cart') as $key => $value ){
+            dump($key, $value);
+            $panier[$i]['product']=$this->produitRepository->find($key);
+            if($panier[$i] == null){
+                break;
+            }else{
+                $panier[$i]['quantity']=$value;
+                $i++;
+            }
+
+        }
         return $this->render('cart/index.html.twig', [
-           'cart' => $cartService->getTotal()
+            'panier' => $panier,
         ]);
-    }
-
-    #[Route('/mon-panier/add/{id<\d+>}', name: 'cart_add')]
-    public function addToCart(CartService $cartService, int $id): Response
-    {
-        $cartService->addToCart($id);
-
-        return $this->redirectToRoute('cart_index');
     }
 
     #[Route('/mon-panier/remove/{id<\d+>}', name: 'cart_remove')]

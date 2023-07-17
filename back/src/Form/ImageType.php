@@ -2,7 +2,10 @@
 
 namespace App\Form;
 
+use App\Entity\Categorie;
 use App\Entity\Image;
+use App\Entity\Produit;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -17,7 +20,16 @@ class ImageType extends AbstractType
                 'label' => 'Image',
                 'data_class' => null,
             ])
-            ->add('produit')
+            ->add('produit', EntityType::class, [
+                'mapped' => true,
+                'class' => Produit::class,
+                'required' => false,
+            ])
+            ->add('categorie', EntityType::class, [
+                'mapped' => true,
+                'class' => Categorie::class,
+                'required' => false,
+            ])
         ;
     }
 

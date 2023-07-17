@@ -19,13 +19,13 @@ class CartService
         $this->em = $em;
     }
 
-    public function addToCart(int $id): void
+    public function addToCart(int $id, int $quantity): void
     {
         $cart = $this->getSession()->get('cart', []);
         if (!empty($cart[$id])) {
-            $cart[$id]++;
+            $cart[$id] += $quantity;
         } else {
-            $cart[$id] = 1;
+            $cart[$id] = $quantity;
         }
         $this->getSession()->set('cart', $cart);
     }

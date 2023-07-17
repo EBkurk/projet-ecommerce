@@ -57,10 +57,12 @@
                     <h2 class="card-header">
                         {{ categories.nom }}
                     </h2>
-{#                    <div class="card-img article_contenu">#}
-{#                        <img class="imageCart" src="{{ asset(produits.images[0].url) }}"/>#}
-{#                    </div>#}
-{#                    <hr>#}
+                    <div class="card-img article_contenu">
+                        {% if categories.images[0].url is defined %}
+                            <img class="imageCart" src="{{ asset(categories.images[0].url) }}" alt="test"/>
+                        {% endif %}
+                    </div>
+                    <hr>
                     <footer class="card-footer d-flex justify-content-between">
                         <a href="{{ path('app_category', {'id': categories.id}) }}">Cliquer ici pour voir les produits</a>
                     </footer>
@@ -78,7 +80,9 @@
                         {{ produits.nom }}
                     </h2>
                     <div class="card-img article_contenu">
-                        <img class="imageCart" src="{{ asset(produits.images[0].url) }}"/>
+                        {% if produits.images[0].url is defined %}
+                            <img class="imageCart" src="{{ asset(produits.images[0].url) }}"/>
+                        {% endif %}
                     </div>
                     <hr>
                     <div class="card-body article_contenu">
