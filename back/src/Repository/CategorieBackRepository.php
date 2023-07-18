@@ -2,26 +2,26 @@
 
 namespace App\Repository;
 
-use App\Entity\Commande;
+use App\Entity\Categorie;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Commande>
+ * @extends ServiceEntityRepository<Categorie>
  *
- * @method Commande|null find($id, $lockMode = null, $lockVersion = null)
- * @method Commande|null findOneBy(array $criteria, array $orderBy = null)
- * @method Commande[]    findAll()
- * @method Commande[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Categorie|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Categorie|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Categorie[]    findAll()
+ * @method Categorie[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class CommandeRepository extends ServiceEntityRepository
+class CategorieBackRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Commande::class);
+        parent::__construct($registry, Categorie::class);
     }
 
-    public function save(Commande $entity, bool $flush = false): void
+    public function save(Categorie $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class CommandeRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(Commande $entity, bool $flush = false): void
+    public function remove(Categorie $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -40,7 +40,7 @@ class CommandeRepository extends ServiceEntityRepository
     }
 
 //    /**
-//     * @return Commande[] Returns an array of Commande objects
+//     * @return Categorie[] Returns an array of Categorie objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -54,7 +54,7 @@ class CommandeRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Commande
+//    public function findOneBySomeField($value): ?Categorie
 //    {
 //        return $this->createQueryBuilder('c')
 //            ->andWhere('c.exampleField = :val')
@@ -63,5 +63,4 @@ class CommandeRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
-
 }

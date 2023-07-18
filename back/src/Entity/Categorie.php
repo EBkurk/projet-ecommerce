@@ -2,12 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\CategorieRepository;
+use App\Repository\CategorieBackRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: CategorieRepository::class)]
+#[ORM\Entity(repositoryClass: CategorieBackRepository::class)]
 class Categorie
 {
     #[ORM\Id]

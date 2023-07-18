@@ -137,11 +137,9 @@ class HomeController extends FrontAbstractController
 
         $product = $this->findBySearch($connection, $form, $session);
         if($product == -1){
-            $product = $this->produitRepository->findBy(['highlander' => 1]);
-            //$product = $this->produitRepository->findProductByHighlander();
+            $product = $this->produitRepository->findProductByHighlander();
         }else if($product == 0){
-            $product = $this->produitRepository->findBy(['highlander' => 1]);
-            //$product = $this->produitRepository->findProductByHighlander();
+            $product = $this->produitRepository->findProductByHighlander();
             $form = $this->createForm(SearchType::class,null,[
                 'isCategory' => true,
                 'options' => $session->get('search'),

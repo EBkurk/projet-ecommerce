@@ -2,10 +2,10 @@
 
 namespace App\Entity;
 
-use App\Repository\AdresseRepository;
+use App\Repository\AdresseBackRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: AdresseRepository::class)]
+#[ORM\Entity(repositoryClass: AdresseBackRepository::class)]
 class Adresse
 {
     #[ORM\Id]

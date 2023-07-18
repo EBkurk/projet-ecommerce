@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Ajouter;
 use App\Form\AjouterType;
-use App\Repository\AjouterRepository;
+use App\Repository\AjouterBackRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class AjouterController extends BackAbstractController
 {
     #[Route('/', name: 'app_ajouter_index', methods: ['GET'])]
-    public function index(AjouterRepository $ajouterRepository): Response
+    public function index(AjouterBackRepository $ajouterRepository): Response
     {
         return $this->render('ajouter/index.html.twig', [
             'ajouters' => $ajouterRepository->findAll(),
@@ -23,7 +23,7 @@ class AjouterController extends BackAbstractController
     }
 
     #[Route('/new', name: 'app_ajouter_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, AjouterRepository $ajouterRepository): Response
+    public function new(Request $request, AjouterBackRepository $ajouterRepository): Response
     {
         $ajouter = new Ajouter();
         $form = $this->createForm(AjouterType::class, $ajouter);
@@ -57,7 +57,7 @@ class AjouterController extends BackAbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_ajouter_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Ajouter $ajouter, AjouterRepository $ajouterRepository): Response
+    public function edit(Request $request, Ajouter $ajouter, AjouterBackRepository $ajouterRepository): Response
     {
         $form = $this->createForm(AjouterType::class, $ajouter);
         $form->handleRequest($request);
@@ -80,7 +80,7 @@ class AjouterController extends BackAbstractController
     }
 
     #[Route('/{id}', name: 'app_ajouter_delete', methods: ['POST'])]
-    public function delete(Request $request, Ajouter $ajouter, AjouterRepository $ajouterRepository): Response
+    public function delete(Request $request, Ajouter $ajouter, AjouterBackRepository $ajouterRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$ajouter->getId(), $request->request->get('_token'))) {
             $produit = $ajouter->getProduit();
