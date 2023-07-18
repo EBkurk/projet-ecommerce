@@ -39,12 +39,12 @@
 
 <h1>Mes commandes</h1>
 
-{% for order in orders %}
+{% for commande in Commandes %}
     <div class="order-container">
-        <h2 class="order-title">Commande du {{ order.date|date('d/m/Y') }}</h2>
+        <h2 class="order-title">Commande du {{ commandes.date|date('d/m/Y') }}</h2>
         <ul class="order-products">
-        {% for product in order.products %}
-            <li>{{ product.name }} - {{ product.price }}€</li>
+        {% for produit in commandes.produit %}
+            <li>{{ produit.nom }} - {{ produit.prix }}€</li>
         {% endfor %}
         </ul>
     </div>
