@@ -13,6 +13,7 @@ class ContactController extends FrontAbstractController
     #[Route('/contact', name: 'app_contact')]
     public function index(Request $request): Response
     {
+        dd($this->getUser());
         $form = $this->createForm(ContactFormType::class,null, []);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
