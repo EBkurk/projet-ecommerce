@@ -19,8 +19,12 @@
                 <h3 class="fs-base fw-normal text-body text-uppercase  pb-1 pb-sm-1">1.
                     <span class="text-decoration-underline ms-1">Shipping details</span>
                 </h3>
-                <p>Si vous n'avez pas d'adresse ajoutez en une dans votre espace personnel<a href="#">Ajouter une adresse</a>
+                <p>Entrez votre adresse si elle n'est pas déjà enregistrée
                 </p>
+                {{ form_start(form) }}
+                {{ form_widget(form) }}
+                <button type="submit">Continuer</button>
+                {{ form_end(form) }}
                 <h3 class="fs-base fw-normal text-body text-uppercase pb-2 pb-sm-3">2.<span class="text-decoration-underline ms-1">Choisir votre livraison</span></h3>
                 {{ form_row(form.adresse)|replace({'[-br]' : '<br/>'})|raw }}
                 <h3 class="fs-base fw-normal text-body text-uppercase mt-n4 mt-md-n3 pt-5 pb-2 pb-ms-3">3. <span class="text-decoration-underline ms-1">Mode de livraison</span></h3>

@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Historique{% endblock %}
+
+{% block content %}
+    
+<h1>Mes commandes</h1>
+
+{% for order in orders %}
+    <div>
+        <h2>Commande du {{ order.date|date('d/m/Y') }}</h2>
+        <ul>
+        {% for product in order.products %}
+            <li>{{ product.name }} - {{ product.price }}€</li>
+        {% endfor %}
+        </ul>
+    </div>
+{% else %}
+    <p>Vous n'avez pas encore passé de commande.</p>
+{% endfor %}
+
+{% endblock %}
