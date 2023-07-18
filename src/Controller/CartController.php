@@ -16,15 +16,17 @@ class CartController extends FrontAbstractController
     {
         $panier = [];
         $i=0;
-        foreach ($request->getSession()->get('cart') as $key => $value ){
-            dump($key, $value);
-            $panier[$i]['product']=$this->produitRepository->find($key);
-            if($panier[$i] == null){
-                break;
-            }else{
-                $panier[$i]['quantity']=$value;
-                $i++;
-            }
+        if($request->getSession()->get('cart') != null){
+            foreach ($request->getSession()->get('cart') as $key => $value ){
+                $panier[$i]['product']=$this->produitRepository->find($key);
+                if($panier[$i] == null){
+                    break;
+                }else{
+                    $panier[$i]['quantity']=$value;
+                    $i++;
+                }
+        }
+
 
         }
         return $this->render('cart/index.html.twig', [
