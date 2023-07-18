@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use App\Entity\Product;
+use App\Repository\ProduitRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -30,9 +31,12 @@ class CartService
         $this->getSession()->set('cart', $cart);
     }
 
-    public function removeToCart(int $id)
+    public function removeToCart(int $id, ProduitRepository $produitRepository)
     {
         $cart = $this->requestStack->getSession()->get('cart', []);
+        $product = $produitRepository->find($id);
+        $product->setStock($product->getStock() + $cart[$id]);
+        $produitRepository->save($product, true);
         unset($cart[$id]);
         return $this->getSession()->set('cart', $cart);
     }
@@ -55,8 +59,18 @@ class CartService
         $this->getSession()->set('cart', $cart);
     }
 
-    public function revoveCartAll()
+    public function revoveCartAll(ProduitRepository $produitRepository)
     {
+        $cart = $this->getSession()->get('cart');
+        foreach ($cart as $key => $value){
+            $produit=$produitRepository->find($key);
+            if($produit == null){
+                break;
+            }else{
+                $produit->setStock($produit->getStock() + $value);
+                $produitRepository->save($produit, true);
+            }
+        }
         return $this->getSession()->remove('cart');
     }
 

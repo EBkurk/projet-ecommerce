@@ -37,7 +37,8 @@ class CartController extends FrontAbstractController
     #[Route('/mon-panier/remove/{id<\d+>}', name: 'cart_remove')]
     public function removeToCart(CartService $cartService, int $id): Response
     {
-        $cartService->removeToCart($id);
+
+        $cartService->removeToCart($id, $this->produitRepository);
 
         return $this->redirectToRoute('cart_index');
     }
@@ -67,8 +68,8 @@ class CartController extends FrontAbstractController
     #[Route('/mon-panier/removeAll', name: 'cart_removeAll')]
     public function removeAll(CartService $cartService): Response
     {
-        $cartService->revoveCartAll();
+        $cartService->revoveCartAll($this->produitRepository);
 
-        return $this->redirectToRoute('shop_index');
+        return $this->redirectToRoute('homepage');
     }
 }
