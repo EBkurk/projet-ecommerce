@@ -14,17 +14,11 @@
                         <l1 class="breadcrumb-item active" aria-current="page">Création de la commande</l1>
                     </ol>
                 </nav>
+                {% if utilisateur.id and adresse.utilisateur is not null %}
                 {{ form_start(form) }}
                 <h1 class="h2 pb-2">Création de la commande</h1>
                 <h3 class="fs-base fw-normal text-body text-uppercase  pb-1 pb-sm-1">1.
                     <span class="text-decoration-underline ms-1">Shipping details</span>
-                </h3>
-                <p>Entrez votre adresse si elle n'est pas déjà enregistrée
-                </p>
-                {{ form_start(form) }}
-                {{ form_widget(form) }}
-                <button type="submit">Continuer</button>
-                {{ form_end(form) }}
                 <h3 class="fs-base fw-normal text-body text-uppercase pb-2 pb-sm-3">2.<span class="text-decoration-underline ms-1">Choisir votre livraison</span></h3>
                 {{ form_row(form.adresse)|replace({'[-br]' : '<br/>'})|raw }}
                 <h3 class="fs-base fw-normal text-body text-uppercase mt-n4 mt-md-n3 pt-5 pb-2 pb-ms-3">3. <span class="text-decoration-underline ms-1">Mode de livraison</span></h3>
@@ -57,6 +51,15 @@
                     </div>
                     {{ form_end(form) }}
                 </div>
+                {% else %}
+            </h3>
+            <p>Entrez votre adresse si elle n'est pas déjà enregistrée
+            </p>
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <button type="submit">Continuer</button>
+            {{ form_end(form) }}
+            {% endif %}
 
 
 

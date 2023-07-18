@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Adresse;
+use App\Entity\Utilisateur;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -17,7 +19,11 @@ class DeliveryFormType extends AbstractType
             ->add('region')
             ->add('code_postal')
             ->add('pays')
-            ->add('utilisateur')
+            ->add('get', EntityType::class, [
+                'class' => Utilisateur::class,
+                'data' => $options['user'],
+                'disabled' => true
+            ])
         ;
     }
 
@@ -25,6 +31,7 @@ class DeliveryFormType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Adresse::class,
+            'user' => null,
         ]);
     }
 }

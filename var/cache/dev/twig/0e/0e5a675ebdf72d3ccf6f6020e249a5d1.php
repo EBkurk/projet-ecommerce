@@ -87,7 +87,7 @@ class __TwigTemplate_cddf4452ad102a69c494a19ae7b151c4 extends Template
         if (array_key_exists("form", $context)) {
             // line 27
             echo "                <ul class=\"navbar-nav\">
-                    <li class=\"navbar-item\">
+                    <li class=\"navbar-item mx-3\">
                         <i id=\"menuButton\" onclick=\"menuSearch()\" class=\"bi bi-zoom-in noLink\"></i>
                     </li>
                 </ul>
@@ -96,7 +96,10 @@ class __TwigTemplate_cddf4452ad102a69c494a19ae7b151c4 extends Template
         // line 33
         echo "            <ul class=\"navbar-nav ms-2\">
                 <li class=\"navbar-item\">
-                    <a href=\"\"><i class=\"bi bi-list noLink border-white\"></i></a>
+                    <a href=\"";
+        // line 35
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_login");
+        echo "\"><i class=\"bi bi-person-circle noLink border-white\"></i></a>
                 </li>
             </ul>
         </nav>
@@ -285,7 +288,7 @@ class __TwigTemplate_cddf4452ad102a69c494a19ae7b151c4 extends Template
 
     public function getDebugInfo()
     {
-        return array (  259 => 82,  240 => 5,  212 => 86,  207 => 83,  205 => 82,  202 => 81,  200 => 80,  197 => 79,  192 => 77,  187 => 75,  183 => 74,  177 => 71,  173 => 70,  166 => 66,  160 => 63,  154 => 60,  148 => 57,  145 => 56,  139 => 53,  136 => 52,  134 => 51,  129 => 49,  125 => 48,  119 => 45,  115 => 44,  109 => 42,  107 => 41,  97 => 33,  89 => 27,  87 => 26,  81 => 23,  74 => 19,  63 => 12,  58 => 9,  51 => 5,  45 => 1,);
+        return array (  262 => 82,  243 => 5,  215 => 86,  210 => 83,  208 => 82,  205 => 81,  203 => 80,  200 => 79,  195 => 77,  190 => 75,  186 => 74,  180 => 71,  176 => 70,  169 => 66,  163 => 63,  157 => 60,  151 => 57,  148 => 56,  142 => 53,  139 => 52,  137 => 51,  132 => 49,  128 => 48,  122 => 45,  118 => 44,  112 => 42,  110 => 41,  101 => 35,  97 => 33,  89 => 27,  87 => 26,  81 => 23,  74 => 19,  63 => 12,  58 => 9,  51 => 5,  45 => 1,);
     }
 
     public function getSourceContext()
@@ -317,14 +320,14 @@ class __TwigTemplate_cddf4452ad102a69c494a19ae7b151c4 extends Template
             </ul>
             {% if form is defined %}
                 <ul class=\"navbar-nav\">
-                    <li class=\"navbar-item\">
+                    <li class=\"navbar-item mx-3\">
                         <i id=\"menuButton\" onclick=\"menuSearch()\" class=\"bi bi-zoom-in noLink\"></i>
                     </li>
                 </ul>
             {% endif %}
             <ul class=\"navbar-nav ms-2\">
                 <li class=\"navbar-item\">
-                    <a href=\"\"><i class=\"bi bi-list noLink border-white\"></i></a>
+                    <a href=\"{{ path('app_login') }}\"><i class=\"bi bi-person-circle noLink border-white\"></i></a>
                 </li>
             </ul>
         </nav>
