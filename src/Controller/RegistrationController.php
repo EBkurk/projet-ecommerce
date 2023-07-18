@@ -103,4 +103,12 @@ class RegistrationController extends FrontAbstractController
 
         return $this->redirectToRoute('app_login');
     }
+
+    #[Route('/profil', name: 'app_info_profil')]
+    public function profil(): Response
+    {
+        return $this->render('profil/index.html.twig', [
+
+        ]);
+    }
 }
