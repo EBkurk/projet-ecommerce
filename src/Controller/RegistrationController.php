@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Produit;
 use App\Entity\Utilisateur;
 use App\Form\RegistrationFormType;
 use App\Service\MailerService;
@@ -17,7 +18,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -27,8 +27,7 @@ class RegistrationController extends FrontAbstractController
 {
     #[Route('/inscription', name: 'app_register')]
     public function register(
-        Request $request, UserPasswordHasherInterface $userPasswordHasher, 
-        EntityManagerInterface $entityManager,
+        Request $request, UserPasswordHasherInterface $userPasswordHasher,
         MailerService $mailerService,
         TokenGeneratorInterface $tokenGeneratorInterface): Response
     {
@@ -39,11 +38,10 @@ class RegistrationController extends FrontAbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             
             //Token
-
             $tokenRegistration = $tokenGeneratorInterface->generateToken();
 
             //User
-            $user->setPassword(
+            $user->setMdp(
                 $userPasswordHasher->hashPassword(
                     $user,
                     $form->get('plainPassword')->getData()
@@ -51,10 +49,10 @@ class RegistrationController extends FrontAbstractController
             );
 
             //User token
-            $user->setTokenRegistration($tokenRegistration);
+            //$user->setTokenRegistration($tokenRegistration);
 
             //Mailer send
-
+            /*
             $mailerService->send(
                 $user->getEmail(),
                 'Confirmation du compte utilisateur',
@@ -65,9 +63,9 @@ class RegistrationController extends FrontAbstractController
                     'lifeTimeToken' => $user->getTokenRegistrationLifeTime()->format('d-m-Y-H-i-s')
                 ]
             );
+            */
 
-            $entityManager->persist($user);
-            $entityManager->flush();
+            $this->utilisateurRepository->save($user, true);
             // do anything else you need here, like send an email
 
             $this->addFlash('success', 'Votre compte à bien été crée, veuillez vérifier votre email pour l\'activer.' );
@@ -80,7 +78,7 @@ class RegistrationController extends FrontAbstractController
         ]);
     }
     #[Route('/verify/{token}/{id<\d+>}', name: 'account_verify', methods: ['GET'])]
-    public function verify(string $token, User $user, EntityManagerInterface $em): Response
+    public function verify(string $token, Utilisateur $user, EntityManagerInterface $em): Response
     {
 
         if ($user->getTokenRegistration() !== $token) {

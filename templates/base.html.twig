@@ -25,14 +25,14 @@
             </ul>
             {% if form is defined %}
                 <ul class="navbar-nav">
-                    <li class="navbar-item">
+                    <li class="navbar-item mx-3">
                         <i id="menuButton" onclick="menuSearch()" class="bi bi-zoom-in noLink"></i>
                     </li>
                 </ul>
             {% endif %}
             <ul class="navbar-nav ms-2">
                 <li class="navbar-item">
-                    <a href=""><i class="bi bi-list noLink border-white"></i></a>
+                    <a href="{{ path('app_login') }}"><i class="bi bi-person-circle noLink border-white"></i></a>
                 </li>
             </ul>
         </nav>
