@@ -13,14 +13,12 @@ class ContactController extends FrontAbstractController
     #[Route('/contact', name: 'app_contact')]
     public function index(Request $request): Response
     {
-        dd($this->getUser());
         $form = $this->createForm(ContactFormType::class,null, []);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
             $mail = new Mail();
             $data = $form->getData();
-            //$mail->setUtilisateur($this->getUser());
-            $mail->setUtilisateur($this->utilisateurRepository->find(3));
+            $mail->setUtilisateur($this->getUser());
             $mail->setObjet($data['objet']);
             $mail->setText($data['mail']);
             $this->mailRepository->save($mail, true);
@@ -28,6 +26,7 @@ class ContactController extends FrontAbstractController
         }
         return $this->render('contact/index.html.twig', [
             'formContact' => $form->createView(),
+            'user' => $this->getUser(),
         ]);
     }
 }

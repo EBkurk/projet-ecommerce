@@ -5,12 +5,16 @@
 {% block content %}
     {{ form_start(formContact) }}
     <h2>Contact</h2>
+    {% if user != null %}
     Objet : {{ form_widget(formContact.objet) }}
     {{ form_widget(formContact.submitMail) }}<br>
     <div class="mail">
         Mail : <br>{{ form_widget(formContact.mail) }}
         {{ form_end(formContact) }}
     </div>
+    {% else %}
+    Veuillez vous connecter avant de pouvoir nous contacter
+    {% endif %}
     <hr>
     <h2>CGU</h2>
     Date d'entrée en vigueur : 21/07/2023<br><br>
