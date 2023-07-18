@@ -65,23 +65,27 @@ class __TwigTemplate_cddf4452ad102a69c494a19ae7b151c4 extends Template
         echo "\"></script>
     </head>
     <body>
+    <div id=\"main\">
     <div class=\"bg-dark display-table sticky-top\">
         <nav class=\"navbar navbar-expand navbar-dark container justify-content-between\">
         <span class=\"navbar-brand fs-3 me-auto\">
             <h5><a class=\"noLink\" href=\"";
-        // line 18
+        // line 19
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("homepage");
         echo "\">AIRNEIS</a></h5>
         </span>
             <ul class=\"navbar-nav\">
                 <li class=\"nav-item mx-3\">
-                    <a href=\"\"><i class=\"bi bi-cart-fill noLink\"></i></a>
+                    <a href=\"";
+        // line 23
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("cart_index");
+        echo "\"><i class=\"bi bi-cart-fill noLink\"></i></a>
                 </li>
             </ul>
             ";
-        // line 25
+        // line 26
         if (array_key_exists("form", $context)) {
-            // line 26
+            // line 27
             echo "                <ul class=\"navbar-nav\">
                     <li class=\"navbar-item\">
                         <i id=\"menuButton\" onclick=\"menuSearch()\" class=\"bi bi-zoom-in noLink\"></i>
@@ -89,7 +93,7 @@ class __TwigTemplate_cddf4452ad102a69c494a19ae7b151c4 extends Template
                 </ul>
             ";
         }
-        // line 32
+        // line 33
         echo "            <ul class=\"navbar-nav ms-2\">
                 <li class=\"navbar-item\">
                     <a href=\"\"><i class=\"bi bi-list noLink border-white\"></i></a>
@@ -99,121 +103,128 @@ class __TwigTemplate_cddf4452ad102a69c494a19ae7b151c4 extends Template
     </div>
     <div id=\"menu\" class=\"hidden\">
         ";
-        // line 40
+        // line 41
         if (array_key_exists("form", $context)) {
-            // line 41
+            // line 42
             echo "            ";
-            echo             $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 41, $this->source); })()), 'form_start');
+            echo             $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 42, $this->source); })()), 'form_start');
             echo "
                 <div class=\"search\">
                     Recherche par titre ";
-            // line 43
-            echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 43, $this->source); })()), "findTextBy", [], "any", false, false, false, 43), 'widget');
+            // line 44
+            echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 44, $this->source); })()), "findTextBy", [], "any", false, false, false, 44), 'widget');
             echo "<br>
                     ";
-            // line 44
-            echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 44, $this->source); })()), "titre", [], "any", false, false, false, 44), 'widget');
+            // line 45
+            echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 45, $this->source); })()), "titre", [], "any", false, false, false, 45), 'widget');
             echo "
                 </div>
                 <div class=\"search\">
                     Recherche par description ";
-            // line 47
-            echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 47, $this->source); })()), "findTextBy2", [], "any", false, false, false, 47), 'widget');
+            // line 48
+            echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 48, $this->source); })()), "findTextBy2", [], "any", false, false, false, 48), 'widget');
             echo "<br>
                     ";
-            // line 48
-            echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 48, $this->source); })()), "description", [], "any", false, false, false, 48), 'widget');
+            // line 49
+            echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 49, $this->source); })()), "description", [], "any", false, false, false, 49), 'widget');
             echo "
                 </div>
              ";
-            // line 50
-            if (twig_get_attribute($this->env, $this->source, ($context["form"] ?? null), "category", [], "any", true, true, false, 50)) {
-                // line 51
+            // line 51
+            if (twig_get_attribute($this->env, $this->source, ($context["form"] ?? null), "category", [], "any", true, true, false, 51)) {
+                // line 52
                 echo "                <div class=\"search\">
                     Par catégorie : ";
-                // line 52
-                echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 52, $this->source); })()), "category", [], "any", false, false, false, 52), 'widget');
+                // line 53
+                echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 53, $this->source); })()), "category", [], "any", false, false, false, 53), 'widget');
                 echo "
                 </div>
             ";
             }
-            // line 55
+            // line 56
             echo "                <div class=\"search\">
                     Par matériaux : ";
-            // line 56
-            echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 56, $this->source); })()), "materiaux", [], "any", false, false, false, 56), 'widget');
+            // line 57
+            echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 57, $this->source); })()), "materiaux", [], "any", false, false, false, 57), 'widget');
             echo "
                 </div>
                 <div class=\"search\">
                     Prix minimum : ";
-            // line 59
-            echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 59, $this->source); })()), "prix_min", [], "any", false, false, false, 59), 'widget');
+            // line 60
+            echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 60, $this->source); })()), "prix_min", [], "any", false, false, false, 60), 'widget');
             echo " €
                 </div>
                 <div class=\"search\">
                     Prix maximum : ";
-            // line 62
-            echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 62, $this->source); })()), "prix_max", [], "any", false, false, false, 62), 'widget');
+            // line 63
+            echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 63, $this->source); })()), "prix_max", [], "any", false, false, false, 63), 'widget');
             echo " €<br>
                 </div>
                 <div class=\"search\">
                     Uniquement en stock : ";
-            // line 65
-            echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 65, $this->source); })()), "stock", [], "any", false, false, false, 65), 'widget');
+            // line 66
+            echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 66, $this->source); })()), "stock", [], "any", false, false, false, 66), 'widget');
             echo "<br>
                 </div>
                 <hr>
                 <div class=\"search\">
                     Trier par : ";
-            // line 69
-            echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 69, $this->source); })()), "trie", [], "any", false, false, false, 69), 'widget');
+            // line 70
+            echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 70, $this->source); })()), "trie", [], "any", false, false, false, 70), 'widget');
             echo "
                     ";
-            // line 70
-            echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 70, $this->source); })()), "trieSens", [], "any", false, false, false, 70), 'widget');
+            // line 71
+            echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 71, $this->source); })()), "trieSens", [], "any", false, false, false, 71), 'widget');
             echo "
                 </div>
                 <div class=\"search\">
                     ";
-            // line 73
-            echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 73, $this->source); })()), "submitSearch", [], "any", false, false, false, 73), 'widget');
+            // line 74
+            echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 74, $this->source); })()), "submitSearch", [], "any", false, false, false, 74), 'widget');
             echo "
                     ";
-            // line 74
-            echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 74, $this->source); })()), "ReniSearch", [], "any", false, false, false, 74), 'widget');
+            // line 75
+            echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 75, $this->source); })()), "ReniSearch", [], "any", false, false, false, 75), 'widget');
             echo "
                 </div>
             ";
-            // line 76
-            echo             $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 76, $this->source); })()), 'form_end');
+            // line 77
+            echo             $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 77, $this->source); })()), 'form_end');
             echo "
         ";
         }
-        // line 78
+        // line 79
         echo "    </div>
     ";
-        // line 79
-        $this->loadTemplate("_partials/_flash.html.twig", "base.html.twig", 79)->display($context);
         // line 80
+        $this->loadTemplate("_partials/_flash.html.twig", "base.html.twig", 80)->display($context);
+        // line 81
         echo "    <div class=\"px-3\">
         ";
-        // line 81
-        $this->displayBlock('content', $context, $blocks);
         // line 82
+        $this->displayBlock('content', $context, $blocks);
+        // line 83
         echo "    </div>
-
-    </body>
-    <footer class=\"bg-light text-center text-lg-start d-flex justify-content-between align-items-center\">
+    <footer id=\"footerSite\" class=\"bg-light text-center text-lg-start d-flex justify-content-between align-items-center\">
         <div class=\"text-center p-3\">
-            <a class=\"text-dark\" href=\"\">CGU - Mentions Légales - Contact</a>
+            <a class=\"text-dark\" href=\"";
+        // line 86
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_contact");
+        echo "\">CGU - Mentions Légales - Contact</a>
         </div>
         <div class=\"text-center p-3 ms-auto\">
-            <a class=\"text-dark\" href=\"\"><i class=\"bi bi-facebook\"></i></a>
+            <a class=\"text-dark\" href=\"https://www.facebook.com/h3hitema/\"><i class=\"bi bi-facebook\"></i></a>
         </div>
         <div class=\"text-center p-3\">
-            <a class=\"text-dark\" href=\"\"><i class=\"bi bi-instagram\"></i></a>
+            <a class=\"text-dark\" href=\"https://www.instagram.com/h3hitema/\"><i class=\"bi bi-instagram\"></i></a>
         </div>
+        <div class=\"text-center p-3\">
+            <a class=\"text-dark\" href=\"https://fr.linkedin.com/school/h3hitema/\"><i class=\"bi bi-linkedin\"></i></a>
+        </div>
+
     </footer>
+    </div>
+    </body>
 
 </html>
 ";
@@ -244,7 +255,7 @@ class __TwigTemplate_cddf4452ad102a69c494a19ae7b151c4 extends Template
 
     }
 
-    // line 81
+    // line 82
     public function block_content($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -274,7 +285,7 @@ class __TwigTemplate_cddf4452ad102a69c494a19ae7b151c4 extends Template
 
     public function getDebugInfo()
     {
-        return array (  248 => 81,  229 => 5,  203 => 82,  201 => 81,  198 => 80,  196 => 79,  193 => 78,  188 => 76,  183 => 74,  179 => 73,  173 => 70,  169 => 69,  162 => 65,  156 => 62,  150 => 59,  144 => 56,  141 => 55,  135 => 52,  132 => 51,  130 => 50,  125 => 48,  121 => 47,  115 => 44,  111 => 43,  105 => 41,  103 => 40,  93 => 32,  85 => 26,  83 => 25,  73 => 18,  63 => 12,  58 => 9,  51 => 5,  45 => 1,);
+        return array (  259 => 82,  240 => 5,  212 => 86,  207 => 83,  205 => 82,  202 => 81,  200 => 80,  197 => 79,  192 => 77,  187 => 75,  183 => 74,  177 => 71,  173 => 70,  166 => 66,  160 => 63,  154 => 60,  148 => 57,  145 => 56,  139 => 53,  136 => 52,  134 => 51,  129 => 49,  125 => 48,  119 => 45,  115 => 44,  109 => 42,  107 => 41,  97 => 33,  89 => 27,  87 => 26,  81 => 23,  74 => 19,  63 => 12,  58 => 9,  51 => 5,  45 => 1,);
     }
 
     public function getSourceContext()
@@ -293,6 +304,7 @@ class __TwigTemplate_cddf4452ad102a69c494a19ae7b151c4 extends Template
         <script src=\"{{ asset('js/script.js') }}\"></script>
     </head>
     <body>
+    <div id=\"main\">
     <div class=\"bg-dark display-table sticky-top\">
         <nav class=\"navbar navbar-expand navbar-dark container justify-content-between\">
         <span class=\"navbar-brand fs-3 me-auto\">
@@ -300,7 +312,7 @@ class __TwigTemplate_cddf4452ad102a69c494a19ae7b151c4 extends Template
         </span>
             <ul class=\"navbar-nav\">
                 <li class=\"nav-item mx-3\">
-                    <a href=\"\"><i class=\"bi bi-cart-fill noLink\"></i></a>
+                    <a href=\"{{ path('cart_index') }}\"><i class=\"bi bi-cart-fill noLink\"></i></a>
                 </li>
             </ul>
             {% if form is defined %}
@@ -361,21 +373,25 @@ class __TwigTemplate_cddf4452ad102a69c494a19ae7b151c4 extends Template
     <div class=\"px-3\">
         {% block content %}{% endblock %}
     </div>
-
-    </body>
-    <footer class=\"bg-light text-center text-lg-start d-flex justify-content-between align-items-center\">
+    <footer id=\"footerSite\" class=\"bg-light text-center text-lg-start d-flex justify-content-between align-items-center\">
         <div class=\"text-center p-3\">
-            <a class=\"text-dark\" href=\"\">CGU - Mentions Légales - Contact</a>
+            <a class=\"text-dark\" href=\"{{ path('app_contact') }}\">CGU - Mentions Légales - Contact</a>
         </div>
         <div class=\"text-center p-3 ms-auto\">
-            <a class=\"text-dark\" href=\"\"><i class=\"bi bi-facebook\"></i></a>
+            <a class=\"text-dark\" href=\"https://www.facebook.com/h3hitema/\"><i class=\"bi bi-facebook\"></i></a>
         </div>
         <div class=\"text-center p-3\">
-            <a class=\"text-dark\" href=\"\"><i class=\"bi bi-instagram\"></i></a>
+            <a class=\"text-dark\" href=\"https://www.instagram.com/h3hitema/\"><i class=\"bi bi-instagram\"></i></a>
         </div>
+        <div class=\"text-center p-3\">
+            <a class=\"text-dark\" href=\"https://fr.linkedin.com/school/h3hitema/\"><i class=\"bi bi-linkedin\"></i></a>
+        </div>
+
     </footer>
+    </div>
+    </body>
 
 </html>
-", "base.html.twig", "E:\\repo_git\\symfony\\projet-ecommerce\\templates\\base.html.twig");
+", "base.html.twig", "C:\\Users\\noval\\OneDrive\\Bureau\\repo_git\\projet-ecommerce\\templates\\base.html.twig");
     }
 }
