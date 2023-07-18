@@ -3,15 +3,15 @@
 namespace App\Controller;
 
 use App\Entity\Produit;
-use App\Repository\AdresseRepository;
-use App\Repository\AjouterRepository;
-use App\Repository\CategorieRepository;
-use App\Repository\CommandeRepository;
-use App\Repository\ComposeRepository;
-use App\Repository\ImageRepository;
-use App\Repository\MateriauxRepository;
-use App\Repository\ProduitRepository;
-use App\Repository\UtilisateurRepository;
+use App\Repository\AdresseBackRepository;
+use App\Repository\AjouterBackRepository;
+use App\Repository\CategorieBackRepository;
+use App\Repository\CommandeBackRepository;
+use App\Repository\ComposeBackRepository;
+use App\Repository\ImageBackRepository;
+use App\Repository\MateriauxBackRepository;
+use App\Repository\ProduitBackRepository;
+use App\Repository\UtilisateurBackRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -32,11 +32,11 @@ class BackAbstractController extends AbstractController
     protected $ajouterRepository;
     protected $composeRepository;
 
-    public function __construct(AdresseRepository $adresseRepository, CommandeRepository $commandeRepository,
-                                ImageRepository $imageRepository, CategorieRepository $categorieRepository,
-                                MateriauxRepository $materiauxRepository, ProduitRepository $produitRepository,
-                                UtilisateurRepository $utilisateurRepository, AjouterRepository $ajouterRepository,
-                                ComposeRepository $composeRepository)
+    public function __construct(AdresseBackRepository     $adresseRepository, CommandeBackRepository $commandeRepository,
+                                ImageBackRepository       $imageRepository, CategorieBackRepository $categorieRepository,
+                                MateriauxBackRepository   $materiauxRepository, ProduitBackRepository $produitRepository,
+                                UtilisateurBackRepository $utilisateurRepository, AjouterBackRepository $ajouterRepository,
+                                ComposeBackRepository     $composeRepository)
     {
         $this->adresseRepository = $adresseRepository;
         $this->commandeRepository = $commandeRepository;

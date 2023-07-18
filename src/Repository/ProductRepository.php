@@ -40,28 +40,6 @@ class ProductRepository extends ServiceEntityRepository
         }
     }
 
-    public function findProductByCategorie(Categorie $categorie)
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.categorie = :val')
-            ->setParameter('val', $categorie)
-            ->orderBy('p.prioriter', 'ASC')
-            ->addOrderBy('p.stock','DESC')
-            ->getQuery()
-            ->getResult();
-    }
-
-    public function findProductByHighlander()
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.highlander = :val')
-            ->setParameter('val', 1)
-            ->orderBy('p.prioriter', 'ASC')
-            ->addOrderBy('p.stock','DESC')
-            ->getQuery()
-            ->getResult();
-    }
-
 //    /**
 //     * @return Product[] Returns an array of Product objects
 //     */

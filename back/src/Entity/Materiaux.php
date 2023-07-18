@@ -2,12 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\MateriauxRepository;
+use App\Repository\MateriauxBackRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: MateriauxRepository::class)]
+#[ORM\Entity(repositoryClass: MateriauxBackRepository::class)]
 class Materiaux
 {
     #[ORM\Id]

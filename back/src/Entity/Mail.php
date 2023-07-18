@@ -2,11 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\MailRepository;
+use App\Repository\MailBackRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: MailRepository::class)]
+#[ORM\Entity(repositoryClass: MailBackRepository::class)]
 class Mail
 {
     #[ORM\Id]

@@ -2,26 +2,26 @@
 
 namespace App\Repository;
 
-use App\Entity\Mail;
+use App\Entity\Materiaux;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Mail>
+ * @extends ServiceEntityRepository<Materiaux>
  *
- * @method Mail|null find($id, $lockMode = null, $lockVersion = null)
- * @method Mail|null findOneBy(array $criteria, array $orderBy = null)
- * @method Mail[]    findAll()
- * @method Mail[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Materiaux|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Materiaux|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Materiaux[]    findAll()
+ * @method Materiaux[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class MailRepository extends ServiceEntityRepository
+class MateriauxBackRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Mail::class);
+        parent::__construct($registry, Materiaux::class);
     }
 
-    public function save(Mail $entity, bool $flush = false): void
+    public function save(Materiaux $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class MailRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(Mail $entity, bool $flush = false): void
+    public function remove(Materiaux $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -40,7 +40,7 @@ class MailRepository extends ServiceEntityRepository
     }
 
 //    /**
-//     * @return Mail[] Returns an array of Mail objects
+//     * @return Materiaux[] Returns an array of Materiaux objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -54,7 +54,7 @@ class MailRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Mail
+//    public function findOneBySomeField($value): ?Materiaux
 //    {
 //        return $this->createQueryBuilder('m')
 //            ->andWhere('m.exampleField = :val')
