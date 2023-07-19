@@ -54,7 +54,7 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function __toString(): string
     {
-        return $this->getPrenom().' '.$this->getNom();
+        return $this->getPrenom().' '.$this->getNom().' / '.$this->getUserIdentifier();
     }
 
     public function getId(): ?int
