@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Adresse;
+use App\Entity\Ajouter;
+use App\Entity\Commande;
 use App\Form\DeliveryFormType;
 use App\Form\LivraisonFormType;
 use App\Form\OrderType;
@@ -59,22 +61,6 @@ class OrderController extends FrontAbstractController
 
         }
 
-        $adresse = $this->adresseRepository->findOneBy(['utilisateur' => $this->getUser()]);
-
-        $form = $this->createForm(DeliveryFormType::class, $adresse, [
-            'user' => $this->getUser(),
-        ]);
-        $form->handleRequest($request);
-
-        if($form->isSubmitted() && $form->isValid()){
-
-        }
-        $formOrder = $this->createForm(OrderType::class, null, [
-            'user' => $this->getUser(),
-            'adresse' => $adresse,
-        ]);
-        $formOrder->handleRequest($request);
-
         $panier = [];
         $i=0;
         if($request->getSession()->get('cart') != null) {
@@ -89,12 +75,50 @@ class OrderController extends FrontAbstractController
             }
         }
 
+
+        $adresse = $this->adresseRepository->findOneBy(['utilisateur' => $this->getUser()]);
+
+        $formOrder = $this->createForm(OrderType::class, null, [
+            'user' => $this->getUser(),
+            'adresse' => $adresse,
+        ]);
+        $formOrder->handleRequest($request);
+
+        if($formOrder->isSubmitted() && $formOrder->isValid()){
+            $data = $request->request->all()['order'];
+            $adresse = new Adresse();
+            $adresse->setUtilisateur($this->getUser());
+            $adresse->setIntitule($data['adresse']['intitule']);
+            $adresse->setVille($data['adresse']['ville']);
+            $adresse->setRegion($data['adresse']['region']);
+            $adresse->setCodePostal($data['adresse']['code_postal']);
+            $adresse->setPays($data['adresse']['pays']);
+            $this->adresseRepository->save($adresse,true);
+
+            $commande = new Commande();
+            $commande->setUtilisateur($this->getUser());
+            $commande->setStatut("Livraison");
+            $this->commandeRepository->save($commande, true);
+
+            foreach ($panier as $key=>$value){
+                $ajouter = new Ajouter();
+                $ajouter->setCommande($commande);
+                $ajouter->setProduit($value['product']);
+                $ajouter->setQte($value['quantity']);
+                $ajouter->setDate(new \DateTime('now'));
+                $this->ajouterRepository->save($ajouter, true);
+            }
+            $session = $request->getSession();
+            $session->remove('cart');
+            return $this->redirectToRoute('homepage');
+        }
+
         return $this->render( 'order/index.html.twig', [
             'utilisateur' => $this->getUser(),
             'adresse' => $adresse,
-            'formAdresse' => $form->createView(),
             'formOrder' => $formOrder->createView(),
-            'recapCart' => $panier
+            'recapCart' => $panier,
+            'lsession' => $request->getSession()->get('cart'),
         ]);
     }
 }

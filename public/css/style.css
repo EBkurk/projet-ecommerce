@@ -115,3 +115,20 @@ body {
 .alert {
     background: wheat;
 }
+
+.notification {
+    position: relative;
+}
+
+.notification-badge {
+    background-color: red;
+    border-radius: 50%;
+    width: 8px;
+    height: 8px;
+    font-size: 12px;
+    text-align: center;
+    line-height: 20px;
+    position: absolute;
+    top: -5px;
+    right: -5px;
+}

@@ -75,6 +75,7 @@ class RegistrationController extends FrontAbstractController
 
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form->createView(),
+            'lsession' => $request->getSession()->get('cart'),
         ]);
     }
     #[Route('/verify/{token}/{id<\d+>}', name: 'account_verify', methods: ['GET'])]

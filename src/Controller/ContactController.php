@@ -27,6 +27,7 @@ class ContactController extends FrontAbstractController
         return $this->render('contact/index.html.twig', [
             'formContact' => $form->createView(),
             'user' => $this->getUser(),
+            'lsession' => $request->getSession()->get('cart'),
         ]);
     }
 }

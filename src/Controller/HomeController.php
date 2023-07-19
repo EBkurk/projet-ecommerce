@@ -157,6 +157,7 @@ class HomeController extends FrontAbstractController
             'category' => $category,
             'carousels' => $carousel,
             'form' => $form->createView(),
+            'lsession' => $request->getSession()->get('cart'),
         ]);
     }
 }

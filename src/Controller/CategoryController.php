@@ -139,7 +139,8 @@ class CategoryController extends FrontAbstractController
             'controller_name' => 'CategoryController',
             'products' => $product,
             'categorie' => $categorie,
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'lsession' => $request->getSession()->get('cart'),
         ]);
     }
 }
