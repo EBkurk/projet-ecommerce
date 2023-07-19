@@ -3,6 +3,10 @@
     text-decoration: none;
 }
 
+.noLinkOrder {
+    text-decoration: none;
+ }
+
 .container {
     position: relative;
 }

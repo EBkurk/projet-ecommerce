@@ -10,11 +10,15 @@
 
     {% if app.user %}
         <div class="mb-3">
-            You are logged in as {{ app.user.email}}, <a href="{{ path('app_logout') }}">Logout</a><br>
+            You are logged in as {{ app.user.email}}, <a href="{{ path('app_logout') }}">Logout</a><br><hr>
             <a href="{{ path('app_info_profil') }}">Modifier les informations du comptes</a>
             <hr>
+            <a href="{{ path('order_livraison') }}">Valider la livraison d'une commande</a>
+            <hr>
+            <a href="{{ path('homepage') }}">Voir les anciennes commandes</a>
+            <hr>
         </div>
-    {% endif %}
+    {% else %}
 
     <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
     <label for="inputEmail">Email</label>
@@ -42,5 +46,6 @@
     </button>
     <hr>
     Si vous n'avez pas de compte aller sur la page <a href="{{ path('app_register') }}">inscription</a>
+    {% endif %}
 </form>
 {% endblock %}

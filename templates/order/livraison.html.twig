@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Livraison{% endblock %}
+
+{% block content %}
+    <hr>
+    {% for commande in commandes %}
+            <a class="noLinkOrder" href="{{ path('see_order_livraison', {id: commande.id}) }}">
+                Commande du {{ commande.ajouters[0].date|date('Y-m-d') }}<br>
+                {% set productTot = 0 %}
+                {% set prix = 0 %}
+                {% for product in commande.ajouters %}
+                     {% set productTot = productTot + product.qte %}
+                    {% set prix = prix + product.produit.prix * product.qte %}
+                {% endfor %}
+                Couts total : {{ prix }}<br>
+                Produits totaux : {{ productTot }} €
+            </a>
+            <br><br><a class="btn btn-info" href="{{ path('change_status_livraison', {id: commande.id}) }}">Valider la livraison</a>
+        <hr>
+    {% endfor %}
+{% endblock %}

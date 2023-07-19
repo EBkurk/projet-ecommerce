@@ -49,9 +49,45 @@ class OrderController extends FrontAbstractController
         ]);
     }
 
+    #[Route('/order/livraison', name: 'order_livraison')]
+    public function validLivraison(Request $request): Response
+    {
+        // Récupère l'utilisateur connecté
+        $user = $this->getUser();
 
+        // Trouve les commandes passées pour cet utilisateur
+        $orders = $this->commandeRepository->findBy([
+            'utilisateur' => $user,
+            'statut' => "Livraison"
+        ]);
 
+        // Rend la vue avec les commandes
+        return $this->render('order/livraison.html.twig', [
+            'commandes' => $orders,
+            'lsession' => $request->getSession()->get('cart'),
+        ]);
+    }
 
+    #[Route('/order/{id}/livraison', name: 'see_order_livraison')]
+    public function seeLivraison(Request $request): Response
+    {
+        $commande = $this->commandeRepository->find($request->attributes->get('id'));
+
+        // Rend la vue avec les commandes
+        return $this->render('order/show.html.twig', [
+            'commande' => $commande,
+            'lsession' => $request->getSession()->get('cart'),
+        ]);
+    }
+
+    #[Route('/valid/{id}/livraison', name: 'change_status_livraison')]
+    public function finLivraison(Request $request): Response
+    {
+        $commande = $this->commandeRepository->find($request->attributes->get('id'));
+        $commande->setStatut("Fin");
+        $this->commandeRepository->save($commande, true);
+        return $this->redirectToRoute('homepage');
+    }
 
     #[Route('/order/create', name: 'order_index')]
     public function index(Request $request): Response
