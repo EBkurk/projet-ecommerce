@@ -56,7 +56,8 @@ class ProductController extends FrontAbstractController
             'formStock' => $formStock,
             'similaires' => $similar,
             'compose' => $compose,
-            'images' => $image
+            'images' => $image,
+            'lsession' => $request->getSession()->get('cart'),
         ]);
     }
 }

@@ -31,6 +31,7 @@ class CartController extends FrontAbstractController
         }
         return $this->render('cart/index.html.twig', [
             'panier' => $panier,
+            'lsession' => $request->getSession()->get('cart'),
         ]);
     }
 
