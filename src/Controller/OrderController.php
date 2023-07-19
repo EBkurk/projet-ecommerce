@@ -5,10 +5,11 @@ namespace App\Controller;
 use App\Entity\Adresse;
 use App\Form\DeliveryFormType;
 use App\Form\LivraisonFormType;
+use App\Form\OrderType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\BrowserKit\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 class OrderController extends FrontAbstractController
 {
@@ -51,16 +52,49 @@ class OrderController extends FrontAbstractController
 
 
     #[Route('/order/create', name: 'order_index')]
-    public function index(): Response
+    public function index(Request $request): Response
     {
         if (!$this->getUser()){
             return $this->redirectToRoute('app_login');
 
         }
 
-        //$form = $this->createForm(type: OrderType::class, data: null, ['user' => $this->getUser()]);
-    
+        $adresse = $this->adresseRepository->findOneBy(['utilisateur' => $this->getUser()]);
 
-        return $this->render( 'order/index.html.twig', ['controller_name' => 'OrderController']);
+        $form = $this->createForm(DeliveryFormType::class, $adresse, [
+            'user' => $this->getUser(),
+        ]);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+
+        }
+        $formOrder = $this->createForm(OrderType::class, null, [
+            'user' => $this->getUser(),
+            'adresse' => $adresse,
+        ]);
+        $formOrder->handleRequest($request);
+
+        $panier = [];
+        $i=0;
+        if($request->getSession()->get('cart') != null) {
+            foreach ($request->getSession()->get('cart') as $key => $value) {
+                $panier[$i]['product'] = $this->produitRepository->find($key);
+                if ($panier[$i] == null) {
+                    break;
+                } else {
+                    $panier[$i]['quantity'] = $value;
+                    $i++;
+                }
+            }
+        }
+
+        return $this->render( 'order/index.html.twig', [
+            'utilisateur' => $this->getUser(),
+            'adresse' => $adresse,
+            'formAdresse' => $form->createView(),
+            'formOrder' => $formOrder->createView(),
+            'recapCart' => $panier
+        ]);
     }
 }

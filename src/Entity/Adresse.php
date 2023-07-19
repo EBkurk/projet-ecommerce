@@ -31,6 +31,11 @@ class Adresse
     #[ORM\ManyToOne(inversedBy: 'adresses')]
     private ?Utilisateur $utilisateur = null;
 
+    public function __toString(): string
+    {
+        return $this->getIntitule().' '.$this->getVille().' '.$this->getRegion().' '.$this->getCodePostal().' '.$this->getPays();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
