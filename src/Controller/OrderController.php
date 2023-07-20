@@ -17,18 +17,22 @@ class OrderController extends FrontAbstractController
 {
 
 
-
-    public function orderHistory(OrderRepository $orderRepository): Response
+    #[Route('/order/historique', name: 'order_history')]
+    public function orderHistory(Request $request): Response
 {
     // Récupère l'utilisateur connecté
     $user = $this->getUser();
 
     // Trouve les commandes passées pour cet utilisateur
-    $orders = $orderRepository->findBy(['user' => $user]);
+    $orders = $this->commandeRepository->findBy([
+        'utilisateur' => $user,
+        'statut' => "Livrée",
+    ]);
 
     // Rend la vue avec les commandes
-    return $this->render('order_history.html.twig', [
-        'orders' => $orders,
+    return $this->render('order/livraison.html.twig', [
+        'commandes' => $orders,
+        'lsession' => $request->getSession()->get('cart'),
     ]);
 }
     
@@ -58,7 +62,7 @@ class OrderController extends FrontAbstractController
         // Trouve les commandes passées pour cet utilisateur
         $orders = $this->commandeRepository->findBy([
             'utilisateur' => $user,
-            'statut' => "Livraison"
+            'statut' => "En cour"
         ]);
 
         // Rend la vue avec les commandes
@@ -84,7 +88,7 @@ class OrderController extends FrontAbstractController
     public function finLivraison(Request $request): Response
     {
         $commande = $this->commandeRepository->find($request->attributes->get('id'));
-        $commande->setStatut("Fin");
+        $commande->setStatut("Livrée");
         $this->commandeRepository->save($commande, true);
         return $this->redirectToRoute('homepage');
     }
@@ -133,7 +137,7 @@ class OrderController extends FrontAbstractController
 
             $commande = new Commande();
             $commande->setUtilisateur($this->getUser());
-            $commande->setStatut("Livraison");
+            $commande->setStatut("En cour");
             $this->commandeRepository->save($commande, true);
 
             foreach ($panier as $key=>$value){
