@@ -4,4 +4,18 @@
 
 {% block content %}
 
+    <h1>Information de l'utilisateur</h1>
+    {{ form_start(formProfil) }}
+    Nom : {{ form_widget(formProfil.nom) }}<br>
+    Prenom : {{ form_widget(formProfil.prenom) }}<br>
+    Tel : {{ form_widget(formProfil.tel) }}<br>
+    <hr>
+    <h1>Addresse de l'utilisateur</h1>
+    {{ form_widget(formProfil.adresse) }}
+    <hr>
+    {{ form_widget(formProfil.submit) }}
+    {{ form_end(formProfil) }}
+    <hr>
+    <a href="{{ path('app_mdp_profil') }}" class="btn btn-info">Modifier le mot de passe</a>
+
 {% endblock %}

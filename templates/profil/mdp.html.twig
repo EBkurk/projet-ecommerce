@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil mdp{% endblock %}
+
+{% block content %}
+
+    <h1>Ancien mot de passe</h1>
+    {{ form_start(formMdp) }}
+    {{ form_widget(formMdp.plainPassword_old) }}
+    <hr>
+    <h1>Nouveaux mot de passe</h1>
+    {{ form_widget(formMdp.plainPassword) }}<br><br>
+    {{ form_widget(formMdp.submit) }}
+    {{ form_end(formMdp) }}
+
+{% endblock %}
