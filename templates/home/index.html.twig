@@ -26,11 +26,23 @@
             {% for carousel in carousels %}
                 {% if i == 0 %}
                     <div class="carousel-item active">
-                        <a href="{{ path('shop_index', {'id': carousel.id}) }}"><img src="{{ asset(carousel.images[0].url) }}" class="d-block w-100 imageCarousel" alt={{ i }}></a>
+                    {% if carousel.images[0].url is defined %}
+                        {% for img in carousel.images  %}
+                            {% if img.principal == 1 %}
+                                <a href="{{ path('shop_index', {'id': carousel.id}) }}"><img src="{{ asset(img.url) }}" class="d-block w-100 imageCarousel" alt={{ i }}></a>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
                     </div>
                 {% else %}
                     <div class="carousel-item">
-                        <a href="{{ path('shop_index', {'id': carousel.id}) }}"><img src="{{ asset(carousel.images[0].url) }}" class="d-block w-100 imageCarousel" alt={{ i }}></a>
+                    {% if carousel.images[0].url is defined %}
+                        {% for img in carousel.images  %}
+                            {% if img.principal == 1 %}
+                                <a href="{{ path('shop_index', {'id': carousel.id}) }}"><img src="{{ asset(img.url) }}" class="d-block w-100 imageCarousel" alt={{ i }}></a>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
                     </div>
                 {% endif %}
                 {% set i = i+1 %}
@@ -59,7 +71,11 @@
                     </h2>
                     <div class="card-img article_contenu">
                         {% if categories.images[0].url is defined %}
-                            <img class="imageCart" src="{{ asset(categories.images[0].url) }}" alt="test"/>
+                            {% for img in categories.images  %}
+                                {% if img.principal == 1 %}
+                                    <img class="imageCart" src="{{ asset(img.url) }}" alt="test"/>
+                                {% endif %}
+                            {% endfor %}
                         {% endif %}
                     </div>
                     <hr>
@@ -81,7 +97,11 @@
                     </h2>
                     <div class="card-img article_contenu">
                         {% if produits.images[0].url is defined %}
-                            <img class="imageCart" src="{{ asset(produits.images[0].url) }}"/>
+                            {% for img in produits.images  %}
+                                {% if img.principal == 1 %}
+                                    <img class="imageCart" src="{{ asset(img.url) }}"/>
+                                {% endif %}
+                            {% endfor %}
                         {% endif %}
                     </div>
                     <hr>

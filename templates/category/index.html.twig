@@ -14,7 +14,11 @@
                     </h2>
                     <div class="card-img article_contenu">
                         {% if produits.images[0].url is defined %}
-                            <img class="imageCart" src="{{ asset(produits.images[0].url) }}"/>
+                            {% for img in produits.images  %}
+                                {% if img.principal == 1 %}
+                                    <img class="imageCart" src="{{ asset(img.url) }}"/>
+                                {% endif %}
+                            {% endfor %}
                         {% endif %}
                     </div>
                     <hr>

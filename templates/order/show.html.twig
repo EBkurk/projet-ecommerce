@@ -74,7 +74,13 @@
         {% for produit in commande.produits %}
             <div class="product-list d-flex align-items-center border-top py-4">
                 <a class="d-inline-block flex-shrink-0 bg-secondary rounded-1 p-sm-2 p-xl-3 mb-2 mb-sm-0" href="">
-                    <img src="{{ asset(produit.images[0].url) }}" width="80" height="80" alt="{{ produit.nom }}"></a>
+                    {% if produit.images[0].url is defined %}
+                        {% for img in produit.images  %}
+                            {% if img.principal == 1 %}
+                                <img src="{{ asset(img.url) }}" width="80" height="80" alt="{{ produit.nom }}"></a>
+                            {% endif %}
+                        {% enfor %}
+                    {% endif %}
                 <div class="product-info w-100 pt-1 ps-sm-4">
                     <div class="d-block">
                         <div class="me-3" style="position: relative; top: 15px;">
