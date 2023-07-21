@@ -55,7 +55,7 @@
       background-color: #138496;
     }
   </style>
-  
+  {{ form_start(formProfil) }}
   <div class="form-container">
     <h1>Information de l'utilisateur</h1>
     <form method="post">
@@ -81,6 +81,7 @@
         {{ form_widget(formProfil.submit) }}
       </div>
     </form>
+      {{ form_end(formProfil) }}
     <hr>
     <a href="{{ path('app_mdp_profil') }}" class="btn btn-info">Modifier le mot de passe</a>
   </div>

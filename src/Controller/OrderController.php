@@ -105,7 +105,7 @@ class OrderController extends FrontAbstractController
             'adresse' => $adresse,
         ]);
         $formOrder->handleRequest($request);
-
+        dump($formOrder->isSubmitted() && $formOrder->isValid());
         if($formOrder->isSubmitted() && $formOrder->isValid()){
             $data = $request->request->all()['order'];
             if(array_key_exists('adresse',$data)){
@@ -132,15 +132,15 @@ class OrderController extends FrontAbstractController
                 $adresseCommande->setRegion($adresse->getRegion());
                 $adresseCommande->setCodePostal($adresse->getCodePostal());
                 $adresseCommande->setPays($adresse->getPays());
-                $adresseCommande->setUtilisateur(null);
+                $adresseCommande->setUtilisateur($this->getUser());
             }
             $commande = new Commande();
             $commande->setUtilisateur($this->getUser());
             $commande->setStatut("En cour");
             $commande->setAdresse($adresseCommande);
-            $this->commandeRepository->save($commande, true);
             $this->adresseRepository->save($adresse,true);
             $this->adresseRepository->save($adresseCommande,true);
+            $this->commandeRepository->save($commande, true);
 
             foreach ($panier as $key=>$value){
                 $ajouter = new Ajouter();
