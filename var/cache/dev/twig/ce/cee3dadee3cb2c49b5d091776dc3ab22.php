@@ -107,35 +107,58 @@ class __TwigTemplate_de0afb041b6da559100bd7f2da8e16d1 extends Template
             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 13, $this->source); })()), "user", [], "any", false, false, false, 13), "email", [], "any", false, false, false, 13), "html", null, true);
             echo ", <a href=\"";
             echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_logout");
-            echo "\">Logout</a>
+            echo "\">Logout</a><br><hr>
+            <a href=\"";
+            // line 14
+            echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_info_profil");
+            echo "\">Modifier les informations du comptes</a>
+            <hr>
+            <a href=\"";
+            // line 16
+            echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("order_livraison");
+            echo "\">Valider la livraison d'une commande</a>
+            <hr>
+            <a href=\"";
+            // line 18
+            echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("order_history");
+            echo "\">Voir toutes mes commandes</a>
+            <hr>
         </div>
     ";
-        }
-        // line 16
-        echo "
+        } else {
+            // line 22
+            echo "
     <h1 class=\"h3 mb-3 font-weight-normal\">Please sign in</h1>
     <label for=\"inputEmail\">Email</label>
     <input type=\"email\" value=\"";
-        // line 19
-        echo twig_escape_filter($this->env, (isset($context["last_username"]) || array_key_exists("last_username", $context) ? $context["last_username"] : (function () { throw new RuntimeError('Variable "last_username" does not exist.', 19, $this->source); })()), "html", null, true);
-        echo "\" name=\"email\" id=\"inputEmail\" class=\"form-control\" autocomplete=\"email\" required autofocus>
+            // line 25
+            echo twig_escape_filter($this->env, (isset($context["last_username"]) || array_key_exists("last_username", $context) ? $context["last_username"] : (function () { throw new RuntimeError('Variable "last_username" does not exist.', 25, $this->source); })()), "html", null, true);
+            echo "\" name=\"email\" id=\"inputEmail\" class=\"form-control\" autocomplete=\"email\" required autofocus>
     <label for=\"inputPassword\">Password</label>
     <input type=\"password\" name=\"password\" id=\"inputPassword\" class=\"form-control\" autocomplete=\"current-password\" required>
 
     <input type=\"hidden\" name=\"_csrf_token\"
            value=\"";
-        // line 24
-        echo twig_escape_filter($this->env, $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderCsrfToken("authenticate"), "html", null, true);
-        echo "\"
+            // line 30
+            echo twig_escape_filter($this->env, $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderCsrfToken("authenticate"), "html", null, true);
+            echo "\"
     >
 
     ";
-        // line 37
-        echo "
+            // line 43
+            echo "
     <button class=\"btn btn-lg btn-primary\" type=\"submit\">
         Se connecter
     </button>
-</form>
+    <hr>
+    Si vous n'avez pas de compte aller sur la page <a href=\"";
+            // line 48
+            echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_register");
+            echo "\">inscription</a>
+    ";
+        }
+        // line 50
+        echo "</form>
 ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -157,7 +180,7 @@ class __TwigTemplate_de0afb041b6da559100bd7f2da8e16d1 extends Template
 
     public function getDebugInfo()
     {
-        return array (  134 => 37,  128 => 24,  120 => 19,  115 => 16,  107 => 13,  104 => 12,  102 => 11,  99 => 10,  93 => 8,  91 => 7,  88 => 6,  78 => 5,  59 => 3,  36 => 1,);
+        return array (  161 => 50,  156 => 48,  149 => 43,  143 => 30,  135 => 25,  130 => 22,  123 => 18,  118 => 16,  113 => 14,  107 => 13,  104 => 12,  102 => 11,  99 => 10,  93 => 8,  91 => 7,  88 => 6,  78 => 5,  59 => 3,  36 => 1,);
     }
 
     public function getSourceContext()
@@ -174,9 +197,15 @@ class __TwigTemplate_de0afb041b6da559100bd7f2da8e16d1 extends Template
 
     {% if app.user %}
         <div class=\"mb-3\">
-            You are logged in as {{ app.user.email}}, <a href=\"{{ path('app_logout') }}\">Logout</a>
+            You are logged in as {{ app.user.email}}, <a href=\"{{ path('app_logout') }}\">Logout</a><br><hr>
+            <a href=\"{{ path('app_info_profil') }}\">Modifier les informations du comptes</a>
+            <hr>
+            <a href=\"{{ path('order_livraison') }}\">Valider la livraison d'une commande</a>
+            <hr>
+            <a href=\"{{ path('order_history') }}\">Voir toutes mes commandes</a>
+            <hr>
         </div>
-    {% endif %}
+    {% else %}
 
     <h1 class=\"h3 mb-3 font-weight-normal\">Please sign in</h1>
     <label for=\"inputEmail\">Email</label>
@@ -202,8 +231,11 @@ class __TwigTemplate_de0afb041b6da559100bd7f2da8e16d1 extends Template
     <button class=\"btn btn-lg btn-primary\" type=\"submit\">
         Se connecter
     </button>
+    <hr>
+    Si vous n'avez pas de compte aller sur la page <a href=\"{{ path('app_register') }}\">inscription</a>
+    {% endif %}
 </form>
 {% endblock %}
-", "security/login.html.twig", "E:\\repo_git\\symfony\\projet-ecommerce\\templates\\security\\login.html.twig");
+", "security/login.html.twig", "C:\\Users\\noval\\OneDrive\\Bureau\\repo_git\\projet-ecommerce\\templates\\security\\login.html.twig");
     }
 }

@@ -18,8 +18,12 @@ return [
         '/mon-panier/removeAll' => [[['_route' => 'cart_removeAll', '_controller' => 'App\\Controller\\CartController::removeAll'], null, null, null, false, false, null]],
         '/contact' => [[['_route' => 'app_contact', '_controller' => 'App\\Controller\\ContactController::index'], null, null, null, false, false, null]],
         '/' => [[['_route' => 'homepage', '_controller' => 'App\\Controller\\HomeController::index'], null, null, null, false, false, null]],
+        '/order/historique' => [[['_route' => 'order_history', '_controller' => 'App\\Controller\\OrderController::orderHistory'], null, null, null, false, false, null]],
+        '/order/livraison' => [[['_route' => 'order_livraison', '_controller' => 'App\\Controller\\OrderController::validLivraison'], null, null, null, false, false, null]],
         '/order/create' => [[['_route' => 'order_index', '_controller' => 'App\\Controller\\OrderController::index'], null, null, null, false, false, null]],
         '/inscription' => [[['_route' => 'app_register', '_controller' => 'App\\Controller\\RegistrationController::register'], null, null, null, false, false, null]],
+        '/profil' => [[['_route' => 'app_info_profil', '_controller' => 'App\\Controller\\RegistrationController::profil'], null, null, null, false, false, null]],
+        '/profil/mdp' => [[['_route' => 'app_mdp_profil', '_controller' => 'App\\Controller\\RegistrationController::changeMdp'], null, null, null, false, false, null]],
         '/connexion' => [[['_route' => 'app_login', '_controller' => 'App\\Controller\\SecurityController::login'], null, null, null, false, false, null]],
         '/logout' => [[['_route' => 'app_logout', '_controller' => 'App\\Controller\\SecurityController::logout'], null, null, null, false, false, null]],
     ],
@@ -45,12 +49,12 @@ return [
                     .'|decrease/(\\d+)(*:219)'
                     .'|increase/(\\d+)(*:241)'
                 .')'
-                .'|/([^/]++)/(?'
-                    .'|category(*:271)'
-                    .'|boutique(*:287)'
-                .')'
-                .'|/verify/([^/]++)/(\\d+)(*:318)'
-                .'|/mon\\-panier/add/(\\d+)(*:348)'
+                .'|/([^/]++)/category(*:268)'
+                .'|/order/([^/]++)/livraison(*:301)'
+                .'|/valid/([^/]++)/livraison(*:334)'
+                .'|/([^/]++)/boutique(*:360)'
+                .'|/verify/([^/]++)/(\\d+)(*:390)'
+                .'|/mon\\-panier/add/(\\d+)(*:420)'
             .')/?$}sDu',
     ],
     [ // $dynamicRoutes
@@ -64,10 +68,12 @@ return [
         197 => [[['_route' => 'cart_remove', '_controller' => 'App\\Controller\\CartController::removeToCart'], ['id'], null, null, false, true, null]],
         219 => [[['_route' => 'cart_decrease', '_controller' => 'App\\Controller\\CartController::decrease'], ['id'], null, null, false, true, null]],
         241 => [[['_route' => 'cart_increase', '_controller' => 'App\\Controller\\CartController::increase'], ['id'], null, null, false, true, null]],
-        271 => [[['_route' => 'app_category', '_controller' => 'App\\Controller\\CategoryController::index'], ['id'], null, null, false, false, null]],
-        287 => [[['_route' => 'shop_index', '_controller' => 'App\\Controller\\ProductController::index'], ['id'], null, null, false, false, null]],
-        318 => [[['_route' => 'account_verify', '_controller' => 'App\\Controller\\RegistrationController::verify'], ['token', 'id'], ['GET' => 0], null, false, true, null]],
-        348 => [
+        268 => [[['_route' => 'app_category', '_controller' => 'App\\Controller\\CategoryController::index'], ['id'], null, null, false, false, null]],
+        301 => [[['_route' => 'see_order_livraison', '_controller' => 'App\\Controller\\OrderController::seeLivraison'], ['id'], null, null, false, false, null]],
+        334 => [[['_route' => 'change_status_livraison', '_controller' => 'App\\Controller\\OrderController::finLivraison'], ['id'], null, null, false, false, null]],
+        360 => [[['_route' => 'shop_index', '_controller' => 'App\\Controller\\ProductController::index'], ['id'], null, null, false, false, null]],
+        390 => [[['_route' => 'account_verify', '_controller' => 'App\\Controller\\RegistrationController::verify'], ['token', 'id'], ['GET' => 0], null, false, true, null]],
+        420 => [
             [['_route' => 'cart_add', '_controller' => 'App\\Controller\\SecurityController::addToCart'], ['id'], null, null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],

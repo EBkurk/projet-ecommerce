@@ -87,7 +87,7 @@ class __TwigTemplate_ac1735efa231965ccbb7e8d21fb1be99 extends Template
         // line 6
         echo "    <h1>Bienvenue sur le site</h1><hr>
     <h1></h1>
-    <div class=\"d-flex justify-content-center\">
+    <div class=\"d-flex justify-content-center carouselProduit\">
         <div id=\"carouselIndicators\" class=\"carousel slide\" style=\"width: 450px;height: 300px\" data-bs-ride=\"carousel\" data-bs-interval=\"3000\">
         <!-- Indicateurs de la diapositive -->
         <ol class=\"carousel-indicators\">
@@ -127,7 +127,7 @@ class __TwigTemplate_ac1735efa231965ccbb7e8d21fb1be99 extends Template
         echo "        </ol>
 
         <!-- Slides -->
-        <div class=\"carousel-inner\" width=\"100px\" height=\"100px\">
+        <div class=\"carousel-inner\">
             ";
         // line 25
         $context["i"] = 0;
@@ -141,19 +141,27 @@ class __TwigTemplate_ac1735efa231965ccbb7e8d21fb1be99 extends Template
             if (((isset($context["i"]) || array_key_exists("i", $context) ? $context["i"] : (function () { throw new RuntimeError('Variable "i" does not exist.', 27, $this->source); })()) == 0)) {
                 // line 28
                 echo "                    <div class=\"carousel-item active\">
-                        <img src=\"https://dummyimage.com/450x300/dee2e6/6c757d.jpg\" class=\"d-block w-100\" alt=";
+                        <a href=\"";
                 // line 29
+                echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("shop_index", ["id" => twig_get_attribute($this->env, $this->source, $context["carousel"], "id", [], "any", false, false, false, 29)]), "html", null, true);
+                echo "\"><img src=\"";
+                echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["carousel"], "images", [], "any", false, false, false, 29), 0, [], "array", false, false, false, 29), "url", [], "any", false, false, false, 29)), "html", null, true);
+                echo "\" class=\"d-block w-100 imageCarousel\" alt=";
                 echo twig_escape_filter($this->env, (isset($context["i"]) || array_key_exists("i", $context) ? $context["i"] : (function () { throw new RuntimeError('Variable "i" does not exist.', 29, $this->source); })()), "html", null, true);
-                echo ">
+                echo "></a>
                     </div>
                 ";
             } else {
                 // line 32
                 echo "                    <div class=\"carousel-item\">
-                        <img src=\"https://dummyimage.com/450x300/dee2e6/6c757d.jpg\" class=\"d-block w-100\" alt=";
+                        <a href=\"";
                 // line 33
+                echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("shop_index", ["id" => twig_get_attribute($this->env, $this->source, $context["carousel"], "id", [], "any", false, false, false, 33)]), "html", null, true);
+                echo "\"><img src=\"";
+                echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["carousel"], "images", [], "any", false, false, false, 33), 0, [], "array", false, false, false, 33), "url", [], "any", false, false, false, 33)), "html", null, true);
+                echo "\" class=\"d-block w-100 imageCarousel\" alt=";
                 echo twig_escape_filter($this->env, (isset($context["i"]) || array_key_exists("i", $context) ? $context["i"] : (function () { throw new RuntimeError('Variable "i" does not exist.', 33, $this->source); })()), "html", null, true);
-                echo ">
+                echo "></a>
                     </div>
                 ";
             }
@@ -197,10 +205,23 @@ class __TwigTemplate_ac1735efa231965ccbb7e8d21fb1be99 extends Template
             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["categories"], "nom", [], "any", false, false, false, 58), "html", null, true);
             echo "
                     </h2>
+                    <div class=\"card-img article_contenu\">
+                        ";
+            // line 61
+            if (twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["categories"], "images", [], "any", false, true, false, 61), 0, [], "array", false, true, false, 61), "url", [], "any", true, true, false, 61)) {
+                // line 62
+                echo "                            <img class=\"imageCart\" src=\"";
+                echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["categories"], "images", [], "any", false, false, false, 62), 0, [], "array", false, false, false, 62), "url", [], "any", false, false, false, 62)), "html", null, true);
+                echo "\" alt=\"test\"/>
+                        ";
+            }
+            // line 64
+            echo "                    </div>
+                    <hr>
                     <footer class=\"card-footer d-flex justify-content-between\">
                         <a href=\"";
-            // line 61
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_category", ["id" => twig_get_attribute($this->env, $this->source, $context["categories"], "id", [], "any", false, false, false, 61)]), "html", null, true);
+            // line 67
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_category", ["id" => twig_get_attribute($this->env, $this->source, $context["categories"], "id", [], "any", false, false, false, 67)]), "html", null, true);
             echo "\">Cliquer ici pour voir les produits</a>
                     </footer>
                 </div>
@@ -210,39 +231,67 @@ class __TwigTemplate_ac1735efa231965ccbb7e8d21fb1be99 extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['categories'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 66
+        // line 72
         echo "    </div>
     <hr>
     <div class=\"row\">
         <h1>Les Highlanders du moment</h1>
         ";
-        // line 70
+        // line 76
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable((isset($context["product"]) || array_key_exists("product", $context) ? $context["product"] : (function () { throw new RuntimeError('Variable "product" does not exist.', 70, $this->source); })()));
+        $context['_seq'] = twig_ensure_traversable((isset($context["product"]) || array_key_exists("product", $context) ? $context["product"] : (function () { throw new RuntimeError('Variable "product" does not exist.', 76, $this->source); })()));
         foreach ($context['_seq'] as $context["_key"] => $context["produits"]) {
-            // line 71
+            // line 77
             echo "            <article class=\"col-4 mb-4\">
                 <div class=\"card\">
                     <h2 class=\"card-header\">
                         ";
-            // line 74
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["produits"], "nom", [], "any", false, false, false, 74), "html", null, true);
+            // line 80
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["produits"], "nom", [], "any", false, false, false, 80), "html", null, true);
             echo "
                     </h2>
+                    <div class=\"card-img article_contenu\">
+                        ";
+            // line 83
+            if (twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["produits"], "images", [], "any", false, true, false, 83), 0, [], "array", false, true, false, 83), "url", [], "any", true, true, false, 83)) {
+                // line 84
+                echo "                            <img class=\"imageCart\" src=\"";
+                echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["produits"], "images", [], "any", false, false, false, 84), 0, [], "array", false, false, false, 84), "url", [], "any", false, false, false, 84)), "html", null, true);
+                echo "\"/>
+                        ";
+            }
+            // line 86
+            echo "                    </div>
+                    <hr>
                     <div class=\"card-body article_contenu\">
                         ";
-            // line 77
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["produits"], "description", [], "any", false, false, false, 77), "html", null, true);
+            // line 89
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["produits"], "description", [], "any", false, false, false, 89), "html", null, true);
             echo "
-                    </div>
+                    <hr>
+                        ";
+            // line 91
+            if ((twig_get_attribute($this->env, $this->source, $context["produits"], "stock", [], "any", false, false, false, 91) > 0)) {
+                // line 92
+                echo "                            Stock : ";
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["produits"], "stock", [], "any", false, false, false, 92), "html", null, true);
+                echo " produit(s)
+                        ";
+            } else {
+                // line 94
+                echo "                            STOCK ÉPUISÉ
+                        ";
+            }
+            // line 96
+            echo "                    </div>
                     <footer class=\"card-footer d-flex justify-content-between\">
                         <a href=\"";
-            // line 80
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("shop_index", ["id" => twig_get_attribute($this->env, $this->source, $context["produits"], "id", [], "any", false, false, false, 80)]), "html", null, true);
+            // line 98
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("shop_index", ["id" => twig_get_attribute($this->env, $this->source, $context["produits"], "id", [], "any", false, false, false, 98)]), "html", null, true);
             echo "\">Cliquer ici pour voir le produit</a>
                         <h5 class=\"mt-2\">";
-            // line 81
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["produits"], "prix", [], "any", false, false, false, 81), "html", null, true);
+            // line 99
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["produits"], "prix", [], "any", false, false, false, 99), "html", null, true);
             echo " €</h5>
                     </footer>
                 </div>
@@ -252,7 +301,7 @@ class __TwigTemplate_ac1735efa231965ccbb7e8d21fb1be99 extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['produits'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 86
+        // line 104
         echo "    </div>
 
 ";
@@ -276,7 +325,7 @@ class __TwigTemplate_ac1735efa231965ccbb7e8d21fb1be99 extends Template
 
     public function getDebugInfo()
     {
-        return array (  256 => 86,  245 => 81,  241 => 80,  235 => 77,  229 => 74,  224 => 71,  220 => 70,  214 => 66,  203 => 61,  197 => 58,  192 => 55,  188 => 54,  170 => 38,  164 => 37,  161 => 36,  155 => 33,  152 => 32,  146 => 29,  143 => 28,  140 => 27,  135 => 26,  133 => 25,  127 => 21,  121 => 20,  118 => 19,  112 => 17,  106 => 15,  103 => 14,  98 => 13,  96 => 12,  88 => 6,  78 => 5,  59 => 3,  36 => 1,);
+        return array (  305 => 104,  294 => 99,  290 => 98,  286 => 96,  282 => 94,  276 => 92,  274 => 91,  269 => 89,  264 => 86,  258 => 84,  256 => 83,  250 => 80,  245 => 77,  241 => 76,  235 => 72,  224 => 67,  219 => 64,  213 => 62,  211 => 61,  205 => 58,  200 => 55,  196 => 54,  178 => 38,  172 => 37,  169 => 36,  159 => 33,  156 => 32,  146 => 29,  143 => 28,  140 => 27,  135 => 26,  133 => 25,  127 => 21,  121 => 20,  118 => 19,  112 => 17,  106 => 15,  103 => 14,  98 => 13,  96 => 12,  88 => 6,  78 => 5,  59 => 3,  36 => 1,);
     }
 
     public function getSourceContext()
@@ -288,7 +337,7 @@ class __TwigTemplate_ac1735efa231965ccbb7e8d21fb1be99 extends Template
 {% block content %}
     <h1>Bienvenue sur le site</h1><hr>
     <h1></h1>
-    <div class=\"d-flex justify-content-center\">
+    <div class=\"d-flex justify-content-center carouselProduit\">
         <div id=\"carouselIndicators\" class=\"carousel slide\" style=\"width: 450px;height: 300px\" data-bs-ride=\"carousel\" data-bs-interval=\"3000\">
         <!-- Indicateurs de la diapositive -->
         <ol class=\"carousel-indicators\">
@@ -304,16 +353,16 @@ class __TwigTemplate_ac1735efa231965ccbb7e8d21fb1be99 extends Template
         </ol>
 
         <!-- Slides -->
-        <div class=\"carousel-inner\" width=\"100px\" height=\"100px\">
+        <div class=\"carousel-inner\">
             {% set i=0 %}
             {% for carousel in carousels %}
                 {% if i == 0 %}
                     <div class=\"carousel-item active\">
-                        <img src=\"https://dummyimage.com/450x300/dee2e6/6c757d.jpg\" class=\"d-block w-100\" alt={{ i }}>
+                        <a href=\"{{ path('shop_index', {'id': carousel.id}) }}\"><img src=\"{{ asset(carousel.images[0].url) }}\" class=\"d-block w-100 imageCarousel\" alt={{ i }}></a>
                     </div>
                 {% else %}
                     <div class=\"carousel-item\">
-                        <img src=\"https://dummyimage.com/450x300/dee2e6/6c757d.jpg\" class=\"d-block w-100\" alt={{ i }}>
+                        <a href=\"{{ path('shop_index', {'id': carousel.id}) }}\"><img src=\"{{ asset(carousel.images[0].url) }}\" class=\"d-block w-100 imageCarousel\" alt={{ i }}></a>
                     </div>
                 {% endif %}
                 {% set i = i+1 %}
@@ -340,6 +389,12 @@ class __TwigTemplate_ac1735efa231965ccbb7e8d21fb1be99 extends Template
                     <h2 class=\"card-header\">
                         {{ categories.nom }}
                     </h2>
+                    <div class=\"card-img article_contenu\">
+                        {% if categories.images[0].url is defined %}
+                            <img class=\"imageCart\" src=\"{{ asset(categories.images[0].url) }}\" alt=\"test\"/>
+                        {% endif %}
+                    </div>
+                    <hr>
                     <footer class=\"card-footer d-flex justify-content-between\">
                         <a href=\"{{ path('app_category', {'id': categories.id}) }}\">Cliquer ici pour voir les produits</a>
                     </footer>
@@ -356,8 +411,20 @@ class __TwigTemplate_ac1735efa231965ccbb7e8d21fb1be99 extends Template
                     <h2 class=\"card-header\">
                         {{ produits.nom }}
                     </h2>
+                    <div class=\"card-img article_contenu\">
+                        {% if produits.images[0].url is defined %}
+                            <img class=\"imageCart\" src=\"{{ asset(produits.images[0].url) }}\"/>
+                        {% endif %}
+                    </div>
+                    <hr>
                     <div class=\"card-body article_contenu\">
                         {{ produits.description }}
+                    <hr>
+                        {% if produits.stock > 0 %}
+                            Stock : {{ produits.stock }} produit(s)
+                        {% else %}
+                            STOCK ÉPUISÉ
+                        {% endif %}
                     </div>
                     <footer class=\"card-footer d-flex justify-content-between\">
                         <a href=\"{{ path('shop_index', {'id': produits.id}) }}\">Cliquer ici pour voir le produit</a>
@@ -369,6 +436,6 @@ class __TwigTemplate_ac1735efa231965ccbb7e8d21fb1be99 extends Template
     </div>
 
 {% endblock %}
-", "home/index.html.twig", "E:\\repo_git\\symfony\\projet-ecommerce\\templates\\home\\index.html.twig");
+", "home/index.html.twig", "C:\\Users\\noval\\OneDrive\\Bureau\\repo_git\\projet-ecommerce\\templates\\home\\index.html.twig");
     }
 }
