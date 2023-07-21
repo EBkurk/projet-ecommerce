@@ -28,11 +28,13 @@ class ImageType extends AbstractType
                 'mapped' => true,
                 'class' => Produit::class,
                 'required' => false,
+                'attr' => array ('onchange' => 'imageProduit()'),
             ])
             ->add('categorie', EntityType::class, [
                 'mapped' => true,
                 'class' => Categorie::class,
                 'required' => false,
+                'attr' => array ('onchange' => 'imageCategorie()'),
             ])
         ;
     }
