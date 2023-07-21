@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mar. 18 juil. 2023 à 10:08
+-- Généré le : ven. 21 juil. 2023 à 11:26
 -- Version du serveur : 10.4.27-MariaDB
 -- Version de PHP : 8.2.0
 
@@ -37,6 +37,13 @@ CREATE TABLE `adresse` (
   `utilisateur_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Déchargement des données de la table `adresse`
+--
+
+INSERT INTO `adresse` (`id`, `intitule`, `ville`, `region`, `code_postal`, `pays`, `utilisateur_id`) VALUES
+(8, 'test', 'test', 'test', '99999', 'test', 4);
+
 -- --------------------------------------------------------
 
 --
@@ -50,6 +57,13 @@ CREATE TABLE `ajouter` (
   `qte` int(11) NOT NULL,
   `date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `ajouter`
+--
+
+INSERT INTO `ajouter` (`id`, `produit_id`, `commande_id`, `qte`, `date`) VALUES
+(10, 9, 12, 4, '2023-07-21');
 
 -- --------------------------------------------------------
 
@@ -82,8 +96,16 @@ INSERT INTO `categorie` (`id`, `nom`) VALUES
 CREATE TABLE `commande` (
   `id` int(11) NOT NULL,
   `statut` varchar(100) NOT NULL,
-  `utilisateur_id` int(11) NOT NULL
+  `utilisateur_id` int(11) NOT NULL,
+  `adresse_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `commande`
+--
+
+INSERT INTO `commande` (`id`, `statut`, `utilisateur_id`, `adresse_id`) VALUES
+(12, 'En cour', 4, 8);
 
 -- --------------------------------------------------------
 
@@ -115,6 +137,7 @@ INSERT INTO `compose` (`id`, `materiaux_id`, `produit_id`) VALUES
 CREATE TABLE `image` (
   `id` int(11) NOT NULL,
   `url` varchar(255) NOT NULL,
+  `principal` tinyint(1) NOT NULL DEFAULT 0,
   `produit_id` int(11) DEFAULT NULL,
   `categorie_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -123,24 +146,24 @@ CREATE TABLE `image` (
 -- Déchargement des données de la table `image`
 --
 
-INSERT INTO `image` (`id`, `url`, `produit_id`, `categorie_id`) VALUES
-(1, 'images/450775746.jpg', 6, NULL),
-(9, 'images/365022848.jpg', 6, NULL),
-(10, 'images/619675323.jpg', 6, NULL),
-(11, 'images/268138296.jpg', 7, NULL),
-(12, 'images/780692897.jpg', 8, NULL),
-(13, 'images/768583785.jpg', 8, NULL),
-(14, 'images/108050744.jpg', 9, NULL),
-(15, 'images/651168970.jpg', 10, NULL),
-(16, 'images/383111524.jpg', 11, NULL),
-(17, 'images/335789176.jpg', 12, NULL),
-(18, 'images/202272303.jpg', 13, NULL),
-(19, 'images/25101262.jpg', 14, NULL),
-(20, 'images/533218444.jpg', 15, NULL),
-(21, 'images/56283427.jpg', 16, NULL),
-(22, 'images/508838307.jpg', 17, NULL),
-(23, 'images/772000728.jpg', 18, NULL),
-(24, 'images/150093809.jpg', NULL, 6);
+INSERT INTO `image` (`id`, `url`, `principal`, `produit_id`, `categorie_id`) VALUES
+(1, 'images/450775746.jpg', 0, 6, NULL),
+(9, 'images/365022848.jpg', 0, 6, NULL),
+(10, 'images/619675323.jpg', 0, 6, NULL),
+(11, 'images/268138296.jpg', 0, 7, NULL),
+(12, 'images/780692897.jpg', 0, 8, NULL),
+(13, 'images/768583785.jpg', 0, 8, NULL),
+(14, 'images/108050744.jpg', 0, 9, NULL),
+(15, 'images/651168970.jpg', 0, 10, NULL),
+(16, 'images/383111524.jpg', 0, 11, NULL),
+(17, 'images/335789176.jpg', 0, 12, NULL),
+(18, 'images/202272303.jpg', 0, 13, NULL),
+(19, 'images/25101262.jpg', 0, 14, NULL),
+(20, 'images/533218444.jpg', 0, 15, NULL),
+(21, 'images/56283427.jpg', 0, 16, NULL),
+(22, 'images/508838307.jpg', 0, 17, NULL),
+(23, 'images/772000728.jpg', 0, 18, NULL),
+(24, 'images/150093809.jpg', 0, NULL, 6);
 
 -- --------------------------------------------------------
 
@@ -151,19 +174,9 @@ INSERT INTO `image` (`id`, `url`, `produit_id`, `categorie_id`) VALUES
 CREATE TABLE `mail` (
   `objet` varchar(255) NOT NULL,
   `text` text NOT NULL,
-  `utilisateur_id` int(11) NOT NULL
+  `utilisateur_id` int(11) NOT NULL,
+  `id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Déchargement des données de la table `mail`
---
-
-INSERT INTO `mail` (`objet`, `text`, `utilisateur_id`) VALUES
-('test', 'test\r\ntest\r\ntest\r\ntest\r\ntest', 3),
-('test', 'e', 3),
-('test', 'e', 3),
-('test', 'e', 3),
-('test', 'e', 3);
 
 -- --------------------------------------------------------
 
@@ -209,16 +222,16 @@ CREATE TABLE `produit` (
 --
 
 INSERT INTO `produit` (`id`, `nom`, `prix`, `stock`, `description`, `carousel`, `highlander`, `arriver`, `prioriter`, `categorie_id`) VALUES
-(6, 'test', 10, 10, 'test', 1, 1, '2023-07-13', 1, 6),
+(6, 'test', 10, 0, 'test', 1, 1, '2023-07-13', 1, 6),
 (7, 'a', 11, 33, 'test2', 1, 0, '2023-07-14', 1, 8),
 (8, 'b', 20, 66, 'test3', 1, 0, '2023-07-14', 0, 9),
-(9, 'c', 5, 88, 'test4', 1, 1, '2023-07-14', 2, 7),
-(10, 'd', 1, 1, 'test5', 0, 0, '2023-07-14', 0, 6),
-(11, 'e', 2, 4, 'etts', 0, 0, '2023-07-14', 1, 6),
+(9, 'c', 5, 48, 'test4', 1, 1, '2023-07-14', 2, 7),
+(10, 'd', 1, 0, 'test5', 0, 0, '2023-07-14', 0, 6),
+(11, 'e', 2, 1, 'etts', 0, 0, '2023-07-14', 1, 6),
 (12, 'f', 3, 2, 'dq', 0, 0, '2023-07-14', 1, 6),
 (13, 'g', 45, 6, 'getrh', 0, 0, '2023-07-14', 3, 6),
-(14, 'h', 6, 9, 'ytj', 0, 0, '2023-07-14', 0, 6),
-(15, 'i', 7, 7, 'edr', 0, 0, '2023-07-14', 0, 6),
+(14, 'h', 6, 6, 'ytj', 0, 0, '2023-07-14', 0, 6),
+(15, 'i', 7, 4, 'edr', 0, 0, '2023-07-14', 0, 6),
 (16, 'j', 8, 3, 'q', 0, 0, '2023-07-14', 4, 6),
 (17, 'efs', 5, 5, 'jhgfds', 0, 0, '2023-07-14', 7, 6),
 (18, 're', 5, 0, 're', 0, 1, '2023-07-15', 0, 10);
@@ -243,7 +256,8 @@ CREATE TABLE `utilisateur` (
 --
 
 INSERT INTO `utilisateur` (`id`, `nom`, `prenom`, `tel`, `email`, `mdp`) VALUES
-(3, 'Bertreux', 'Stanislas', '0000000000', 'bertreux.stanislas@gmail.com', 'i');
+(3, 'Bertreux', 'Stanislas', '0000000000', 'bertreux.stanislas@gmail.com', 'i'),
+(4, 'stan', 'bertreux', '0000000000', 'test@gmail.com', '$2y$13$YU70ucn5yWvQntzGyt0.JOlK.Vx9Q00V/Ax0zPgXAM.yd96oUTurq');
 
 --
 -- Index pour les tables déchargées
@@ -276,7 +290,8 @@ ALTER TABLE `categorie`
 --
 ALTER TABLE `commande`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `id_utilisateur` (`utilisateur_id`) USING BTREE;
+  ADD KEY `id_utilisateur` (`utilisateur_id`) USING BTREE,
+  ADD KEY `commande_adresse_id_fk` (`adresse_id`);
 
 --
 -- Index pour la table `compose`
@@ -290,6 +305,12 @@ ALTER TABLE `compose`
 -- Index pour la table `image`
 --
 ALTER TABLE `image`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `mail`
+--
+ALTER TABLE `mail`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -319,13 +340,13 @@ ALTER TABLE `utilisateur`
 -- AUTO_INCREMENT pour la table `adresse`
 --
 ALTER TABLE `adresse`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT pour la table `ajouter`
 --
 ALTER TABLE `ajouter`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT pour la table `categorie`
@@ -337,7 +358,7 @@ ALTER TABLE `categorie`
 -- AUTO_INCREMENT pour la table `commande`
 --
 ALTER TABLE `commande`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT pour la table `compose`
@@ -350,6 +371,12 @@ ALTER TABLE `compose`
 --
 ALTER TABLE `image`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
+--
+-- AUTO_INCREMENT pour la table `mail`
+--
+ALTER TABLE `mail`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `materiaux`
@@ -367,7 +394,7 @@ ALTER TABLE `produit`
 -- AUTO_INCREMENT pour la table `utilisateur`
 --
 ALTER TABLE `utilisateur`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Contraintes pour les tables déchargées
@@ -390,7 +417,8 @@ ALTER TABLE `ajouter`
 -- Contraintes pour la table `commande`
 --
 ALTER TABLE `commande`
-  ADD CONSTRAINT `cle_utilisateur` FOREIGN KEY (`utilisateur_id`) REFERENCES `utilisateur` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `cle_utilisateur` FOREIGN KEY (`utilisateur_id`) REFERENCES `utilisateur` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `commande_adresse_id_fk` FOREIGN KEY (`adresse_id`) REFERENCES `adresse` (`id`);
 
 --
 -- Contraintes pour la table `compose`

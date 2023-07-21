@@ -13,7 +13,8 @@
     {% endfor %}
     Couts total : {{ prix }}<br>
     Produits totaux : {{ productTot }} €<br>
-    Statut de la commande : {{ commande.statut }}
+    Statut de la commande : {{ commande.statut }}<br>
+    Adresse de livraison : {{ commande.adresse.intitule }} {{ commande.adresse.codePostal }} {{ commande.adresse.ville }} {{ commande.adresse.pays }} {{ commande.adresse.region }}
     <hr>
     <div class="col-lg-5 offset-lg-1 pt-1">
         <h2 class="pb-2 pt-md-2 my-4 mt-lg-5">Récapitulatif de votre commande<br><span

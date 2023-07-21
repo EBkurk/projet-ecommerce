@@ -2,13 +2,19 @@
 
 namespace App\Entity;
 
-use App\Repository\UtilisateurBackRepository;
+use App\Repository\UtilisateurRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: UtilisateurBackRepository::class)]
-class Utilisateur
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
+
+#[ORM\Entity(repositoryClass: UtilisateurRepository::class)]
+#[ORM\Table(name: '`utilisateur`')]
+#[UniqueEntity(fields: ['email'], message: 'Il y a un déjà un compte crée avec cet email')]
+class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -48,7 +54,7 @@ class Utilisateur
 
     public function __toString(): string
     {
-        return $this->getPrenom().' '.$this->getNom();
+        return $this->getPrenom().' '.$this->getNom().' / '.$this->getUserIdentifier();
     }
 
     public function getId(): ?int
@@ -204,5 +210,35 @@ class Utilisateur
         }
 
         return $this;
+    }
+
+    public function getPassword(): ?string
+    {
+        return $this->mdp;
+    }
+
+    public function getRoles(): array
+    {
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    public function setPassword(string $password): static
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    public function eraseCredentials()
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
+    }
+
+    public function getUserIdentifier(): string
+    {
+        return $this->email;
     }
 }

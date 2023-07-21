@@ -2,11 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\AjouterBackRepository;
+use App\Repository\AjouterRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: AjouterBackRepository::class)]
+#[ORM\Entity(repositoryClass: AjouterRepository::class)]
 class Ajouter
 {
     #[ORM\Id]

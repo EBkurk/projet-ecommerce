@@ -23,14 +23,7 @@ class OrderType extends AbstractType
 //                'data' => $options['user'],
 //                'disabled' => true,
 //                ]);
-        if($options['adresse'] != null){
-            $builder
-                ->add('adresse', EntityType::class, [
-                'class' => Adresse::class,
-                'data' => $options['adresse'],
-                'disabled' => true,
-            ]);
-        }else{
+        if($options['adresse'] == null){
             $builder
                 ->add('adresse', DeliveryFormType::class, []);
         }

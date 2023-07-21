@@ -2,14 +2,14 @@
 
 namespace App\Entity;
 
-use App\Repository\ProduitBackRepository;
+use App\Repository\ProduitRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\JoinTable;
 
-#[ORM\Entity(repositoryClass: ProduitBackRepository::class)]
+#[ORM\Entity(repositoryClass: ProduitRepository::class)]
 class Produit
 {
     #[ORM\Id]
