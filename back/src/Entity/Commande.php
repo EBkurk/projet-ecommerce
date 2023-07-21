@@ -2,12 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\CommandeBackRepository;
+use App\Repository\CommandeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: CommandeBackRepository::class)]
+#[ORM\Entity(repositoryClass: CommandeRepository::class)]
 class Commande
 {
     #[ORM\Id]
@@ -27,6 +27,9 @@ class Commande
 
     #[ORM\OneToMany(mappedBy: 'commande', targetEntity: Ajouter::class)]
     private Collection $ajouters;
+
+    #[ORM\ManyToOne(inversedBy: 'commandes')]
+    private ?Adresse $adresse = null;
 
     public function __construct()
     {
@@ -121,6 +124,18 @@ class Commande
                 $ajouter->setCommande(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getAdresse(): ?Adresse
+    {
+        return $this->adresse;
+    }
+
+    public function setAdresse(?Adresse $adresse): static
+    {
+        $this->adresse = $adresse;
 
         return $this;
     }

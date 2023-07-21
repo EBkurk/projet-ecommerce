@@ -2,10 +2,10 @@
 
 namespace App\Entity;
 
-use App\Repository\ComposeBackRepository;
+use App\Repository\ComposeRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: ComposeBackRepository::class)]
+#[ORM\Entity(repositoryClass: ComposeRepository::class)]
 class Compose
 {
     #[ORM\Id]

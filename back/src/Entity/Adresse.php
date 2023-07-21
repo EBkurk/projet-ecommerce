@@ -2,10 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\AdresseBackRepository;
+use App\Repository\AdresseRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: AdresseBackRepository::class)]
+#[ORM\Entity(repositoryClass: AdresseRepository::class)]
 class Adresse
 {
     #[ORM\Id]
@@ -30,6 +32,19 @@ class Adresse
 
     #[ORM\ManyToOne(inversedBy: 'adresses')]
     private ?Utilisateur $utilisateur = null;
+
+    #[ORM\OneToMany(mappedBy: 'adresse', targetEntity: Commande::class)]
+    private Collection $commandes;
+
+    public function __construct()
+    {
+        $this->commandes = new ArrayCollection();
+    }
+
+    public function __toString(): string
+    {
+        return $this->getIntitule().' '.$this->getVille().' '.$this->getRegion().' '.$this->getCodePostal().' '.$this->getPays();
+    }
 
     public function getId(): ?int
     {
@@ -104,6 +119,36 @@ class Adresse
     public function setUtilisateur(?Utilisateur $utilisateur): self
     {
         $this->utilisateur = $utilisateur;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Commande>
+     */
+    public function getCommandes(): Collection
+    {
+        return $this->commandes;
+    }
+
+    public function addCommande(Commande $commande): static
+    {
+        if (!$this->commandes->contains($commande)) {
+            $this->commandes->add($commande);
+            $commande->setAdresse($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommande(Commande $commande): static
+    {
+        if ($this->commandes->removeElement($commande)) {
+            // set the owning side to null (unless already changed)
+            if ($commande->getAdresse() === $this) {
+                $commande->setAdresse(null);
+            }
+        }
 
         return $this;
     }

@@ -19,37 +19,19 @@ class OrderController extends FrontAbstractController
 
     #[Route('/order/historique', name: 'order_history')]
     public function orderHistory(Request $request): Response
-{
-    // Récupère l'utilisateur connecté
-    $user = $this->getUser();
-
-    // Trouve les commandes passées pour cet utilisateur
-    $orders = $this->commandeRepository->findBy([
-        'utilisateur' => $user,
-        'statut' => "Livrée",
-    ]);
-
-    // Rend la vue avec les commandes
-    return $this->render('order/livraison.html.twig', [
-        'commandes' => $orders,
-        'lsession' => $request->getSession()->get('cart'),
-    ]);
-}
-    
-
-    public function checkout(Request $request)
-
     {
-        $deliveryAddress = new Adresse();
-        $form = $this->createForm(DeliveryFormType::class, $deliveryAddress);
-    
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            // Sauvegardez $deliveryAddress dans la base de données...
-        }
-    
-        return $this->render('checkout.html.twig', [
-            'form' => $form->createView(),
+        // Récupère l'utilisateur connecté
+        $user = $this->getUser();
+
+        // Trouve les commandes passées pour cet utilisateur
+        $orders = $this->commandeRepository->findBy([
+            'utilisateur' => $user,
+        ]);
+
+        // Rend la vue avec les commandes
+        return $this->render('order/livraison.html.twig', [
+            'commandes' => $orders,
+            'lsession' => $request->getSession()->get('cart'),
         ]);
     }
 
@@ -126,18 +108,20 @@ class OrderController extends FrontAbstractController
 
         if($formOrder->isSubmitted() && $formOrder->isValid()){
             $data = $request->request->all()['order'];
-            $adresse = new Adresse();
-            $adresse->setUtilisateur($this->getUser());
-            $adresse->setIntitule($data['adresse']['intitule']);
-            $adresse->setVille($data['adresse']['ville']);
-            $adresse->setRegion($data['adresse']['region']);
-            $adresse->setCodePostal($data['adresse']['code_postal']);
-            $adresse->setPays($data['adresse']['pays']);
-            $this->adresseRepository->save($adresse,true);
-
+            if(array_key_exists('adresse',$data)){
+                $adresse = new Adresse();
+                $adresse->setIntitule($data['adresse']['intitule']);
+                $adresse->setVille($data['adresse']['ville']);
+                $adresse->setRegion($data['adresse']['region']);
+                $adresse->setCodePostal($data['adresse']['code_postal']);
+                $adresse->setPays($data['adresse']['pays']);
+                $adresse->setUtilisateur($this->getUser());
+                $this->adresseRepository->save($adresse,true);
+            }
             $commande = new Commande();
             $commande->setUtilisateur($this->getUser());
             $commande->setStatut("En cour");
+            $commande->setAdresse($adresse);
             $this->commandeRepository->save($commande, true);
 
             foreach ($panier as $key=>$value){
