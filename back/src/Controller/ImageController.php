@@ -38,7 +38,6 @@ class ImageController extends BackAbstractController
         }
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
-            //dd($data);
             $fileSystem = new Filesystem();
             $fileName = rand(1, 999999999).'.'.$file->getClientOriginalExtension();
             $fileSystem->copy($file->getPathname(), 'images/' . $fileName);
@@ -95,6 +94,7 @@ class ImageController extends BackAbstractController
         }
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
+            dd($data);
             unlink($oldFile);
             unlink('../../public/'.$oldFile);
             $fileSystem = new Filesystem();
