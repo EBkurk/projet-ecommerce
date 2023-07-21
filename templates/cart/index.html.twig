@@ -17,7 +17,13 @@
                         {% set totalProduit = totalProduit + item.quantity %}
                         <div class="d-sm-flex align-items-center border-top py-4">
                             <a class="d-inline-block flex-shrink-0 bg-secondary rounded-1 p-sm-2 p-xl-3 mb-2 mb-sm-0" href="#">
-                                <img src="{{ asset('/images/25101262.jpg') }}" width="110" alt="Produit"></a>
+                                {% if item.product.images[0].url is defined %}
+                                    {% for img in item.product.images  %}
+                                        {% if img.principal == 1 %}
+                                            <img src="{{ asset(img.url) }}" width="110" alt="Produit"></a>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
                             <div class="w-100 pt-1 ps-sm-4">
                                 <div class="d-flex">
                                     <div class="me-3">
