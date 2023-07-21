@@ -38,7 +38,6 @@ class ImageController extends BackAbstractController
         }
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
-            dd($data);
             $fileSystem = new Filesystem();
             $fileName = rand(1, 999999999).'.'.$file->getClientOriginalExtension();
             $fileSystem->copy($file->getPathname(), 'images/' . $fileName);
@@ -47,13 +46,13 @@ class ImageController extends BackAbstractController
 
             $imageP = $this->imageRepository->findOneBy([
                 'principal' => true,
-                'produit' => $this->produitRepository->find($data['produit']),
-                'categorie' => $this->categorieRepository->find($data['categorie']),
+                'produit' => $data->getProduit(),
+                'categorie' => $data->getCategorie(),
             ]);
             if($imageP == null){
                 $image->setPrincipal(true);
             }else{
-                if($data['principal'] == true){
+                if($data->isPrincipal() == true){
                     $imageP->setPrincipal(false);
                     $this->imageRepository->save($imageP,true);
                 }
@@ -107,13 +106,13 @@ class ImageController extends BackAbstractController
 
             $imageP = $this->imageRepository->findOneBy([
                 'principal' => true,
-                'produit' => $this->produitRepository->find($data['produit']),
-                'categorie' => $this->categorieRepository->find($data['categorie']),
+                'produit' => $data->getProduit(),
+                'categorie' => $data->getCategorie(),
             ]);
             if($imageP == null){
                 $image->setPrincipal(true);
             }else{
-                if($data['principal'] == true){
+                if($data->isPrincipal() == true){
                     $imageP->setPrincipal(false);
                     $this->imageRepository->save($imageP,true);
                 }
