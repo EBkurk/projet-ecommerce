@@ -12,6 +12,9 @@
                 <td class="no-sort colloneTable"><input id="checkboxAll" type="checkbox" onchange="selectAll(this)"></td>
                 <th>Id</th>
                 <th>Url</th>
+                <th>Principal</th>
+                <th>Produit</th>
+                <th>Categorie</th>
                 <td class="no-sort imageCollumn">Image</td>
                 <th class="no-sort">actions</th>
             </tr>
@@ -22,6 +25,13 @@
                 <td><input type="checkbox" onchange="selectOne()"></td>
                 <td>{{ image.id }}</td>
                 <td>{{ image.url }}</td>
+                {% if image.principal == 0 %}
+                    <td>False</td>
+                {% else %}
+                    <td>True</td>
+                {% endif %}
+                <td>{{ image.produit }}</td>
+                <td>{{ image.categorie }}</td>
                 <td><img class="imageIndex" src="{{ asset( image.url ) }}"></td>
                 <td>
                     <a href="{{ path('app_image_show', {'id': image.id}) }}">show</a>
@@ -30,7 +40,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="4">no records found</td>
+                <td colspan="7">no records found</td>
             </tr>
         {% endfor %}
         </tbody>

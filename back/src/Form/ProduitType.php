@@ -16,6 +16,10 @@ class ProduitType extends AbstractType
             ->add('prix')
             ->add('stock')
             ->add('description')
+            ->add('carousel')
+            ->add('highlander')
+            ->add('arriver')
+            ->add('prioriter')
             ->add('categorie')
         ;
     }

@@ -12,6 +12,8 @@
                 <td class="no-sort colloneTable"><input id="checkboxAll" type="checkbox" onchange="selectAll(this)"></td>
                 <th>Id</th>
                 <th>Statut</th>
+                <th>Utilisateur</th>
+                <th>Adresse</th>
                 <th class="no-sort">actions</th>
             </tr>
         </thead>
@@ -21,6 +23,8 @@
                 <td><input type="checkbox" onchange="selectOne()"></td>
                 <td>{{ commande.id }}</td>
                 <td>{{ commande.statut }}</td>
+                <td>{{ commande.utilisateur }}</td>
+                <td>{{ commande.adresse }}</td>
                 <td>
                     <a href="{{ path('app_commande_show', {'id': commande.id}) }}">show</a>
                     <a href="{{ path('app_commande_edit', {'id': commande.id}) }}">edit</a>
@@ -28,7 +32,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="4">no records found</td>
+                <td colspan="6">no records found</td>
             </tr>
         {% endfor %}
         </tbody>

@@ -5,7 +5,7 @@
 {% block body %}
     <h1>Edit Image</h1>
     
-    Image actuelle : <img src="{{ asset(image.url) }}"><br><hr>
+    Image actuelle : <img width="200px" src="{{ asset(image.url) }}"><br><hr>
 
     {{ include('image/_form.html.twig', {'button_label': 'Update'}) }}
 

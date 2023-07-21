@@ -13,8 +13,8 @@ class CommandeType extends AbstractType
     {
         $builder
             ->add('statut')
-            ->add('produits')
             ->add('utilisateur')
+            ->add('adresse')
         ;
     }
 
