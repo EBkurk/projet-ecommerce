@@ -9,15 +9,62 @@
     {% endif %}
 
     {% if app.user %}
-        <div class="mb-3">
-            You are logged in as {{ app.user.email}}, <a href="{{ path('app_logout') }}">Logout</a><br><hr>
-            <a href="{{ path('app_info_profil') }}">Modifier les informations du comptes</a>
-            <hr>
-            <a href="{{ path('order_livraison') }}">Valider la livraison d'une commande</a>
-            <hr>
-            <a href="{{ path('order_history') }}">Voir toutes mes commandes</a>
-            <hr>
+    <style>
+        .user-panel {
+          width: 60%;
+          margin: 0 auto;
+          background: #f6f6f6;
+          border: 1px solid #ddd;
+          padding: 20px;
+          border-radius: 8px;
+        }
+      
+        .user-panel p {
+          font-size: 18px;
+          color: #333;
+        }
+      
+        .user-panel a {
+          display: block;
+          background-color: #007bff;
+          color: white;
+          padding: 10px 20px;
+          text-decoration: none;
+          border-radius: 4px;
+          margin-bottom: 10px;
+          text-align: center;
+        }
+      
+        .user-panel a:hover {
+          background-color: #0056b3;
+        }
+        
+        .user-panel .logout-container {
+          display: flex;
+          justify-content: space-between;
+          background-color: transparent;
+          margin-bottom: 20px;
+        }
+        
+        .logout-container a {
+          background-color: #000;
+        }
+      </style>
+      
+      <div class="user-panel mb-3">
+        <div class="logout-container">
+          <p>Vous êtes connecté en tant que :  {{ app.user.email }}</p>
+          <a href="{{ path('app_logout') }}">Logout</a>
         </div>
+        <hr>
+        <a href="{{ path('app_info_profil') }}">Modifier les informations du compte</a>
+        <hr>
+        <a href="{{ path('order_livraison') }}">Valider la livraison d'une commande</a>
+        <hr>
+        <a href="{{ path('order_history') }}">Voir toutes mes commandes</a>
+        <hr>
+      </div>
+      
     {% else %}
 
     <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
