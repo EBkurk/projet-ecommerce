@@ -94,7 +94,9 @@ function selectOne() {
 }
 
 window.addEventListener("DOMContentLoaded", (event) => {
-    if(document.getElementById("image_produit").value != ""){
+    if(document.getElementById("image_produit").value == "" && document.getElementById("image_categorie").value == ""){
+
+    }else if (document.getElementById("image_produit").value != ""){
         document.getElementById("image_categorie").style.display = "none";
         document.getElementById("image_categorie").value = null;
     }else{
