@@ -116,13 +116,31 @@ class OrderController extends FrontAbstractController
                 $adresse->setCodePostal($data['adresse']['code_postal']);
                 $adresse->setPays($data['adresse']['pays']);
                 $adresse->setUtilisateur($this->getUser());
-                $this->adresseRepository->save($adresse,true);
+            }
+            $adresseCommande = $this->adresseRepository->findOneBy([
+                'utilisateur' => null,
+                'intitule' => $adresse->getIntitule(),
+                'ville' => $adresse->getVille(),
+                'region' => $adresse->getCodePostal(),
+                'pays' => $adresse->getPays(),
+                'code_postal' => $adresse->getCodePostal()
+            ]);
+            if($adresseCommande == null){
+                $adresseCommande = new Adresse();
+                $adresseCommande->setIntitule($adresse->getIntitule());
+                $adresseCommande->setVille($adresse->getVille());
+                $adresseCommande->setRegion($adresse->getRegion());
+                $adresseCommande->setCodePostal($adresse->getCodePostal());
+                $adresseCommande->setPays($adresse->getPays());
+                $adresseCommande->setUtilisateur(null);
             }
             $commande = new Commande();
             $commande->setUtilisateur($this->getUser());
             $commande->setStatut("En cour");
-            $commande->setAdresse($adresse);
+            $commande->setAdresse($adresseCommande);
             $this->commandeRepository->save($commande, true);
+            $this->adresseRepository->save($adresse,true);
+            $this->adresseRepository->save($adresseCommande,true);
 
             foreach ($panier as $key=>$value){
                 $ajouter = new Ajouter();

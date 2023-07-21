@@ -38,11 +38,26 @@ class ImageController extends BackAbstractController
         }
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
+            dd($data);
             $fileSystem = new Filesystem();
             $fileName = rand(1, 999999999).'.'.$file->getClientOriginalExtension();
             $fileSystem->copy($file->getPathname(), 'images/' . $fileName);
             $file->move('../../public/images', $fileName);
             $image->setUrl('images/'.$fileName);
+
+            $imageP = $this->imageRepository->findOneBy([
+                'principal' => true,
+                'produit' => $this->produitRepository->find($data['produit']),
+                'categorie' => $this->categorieRepository->find($data['categorie']),
+            ]);
+            if($imageP == null){
+                $image->setPrincipal(true);
+            }else{
+                if($data['principal'] == true){
+                    $imageP->setPrincipal(false);
+                    $this->imageRepository->save($imageP,true);
+                }
+            }
 
             $this->imageRepository->save($image, true);
 
@@ -80,6 +95,7 @@ class ImageController extends BackAbstractController
         }
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
+            dd($data);
             unlink($oldFile);
             unlink('../../public/'.$oldFile);
             $fileSystem = new Filesystem();
@@ -88,6 +104,20 @@ class ImageController extends BackAbstractController
             $fileSystem->copy($file->getPathname(), 'images/' . $fileName);
             $file->move('../../public/images', $fileName);
             $image->setUrl('images/'.$fileName);
+
+            $imageP = $this->imageRepository->findOneBy([
+                'principal' => true,
+                'produit' => $this->produitRepository->find($data['produit']),
+                'categorie' => $this->categorieRepository->find($data['categorie']),
+            ]);
+            if($imageP == null){
+                $image->setPrincipal(true);
+            }else{
+                if($data['principal'] == true){
+                    $imageP->setPrincipal(false);
+                    $this->imageRepository->save($imageP,true);
+                }
+            }
 
             $this->imageRepository->save($image, true);
 

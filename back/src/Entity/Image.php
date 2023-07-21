@@ -22,6 +22,9 @@ class Image
     #[ORM\ManyToOne(inversedBy: 'images')]
     private ?Categorie $categorie = null;
 
+    #[ORM\Column]
+    private ?bool $principal = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -59,6 +62,18 @@ class Image
     public function setCategorie(?Categorie $categorie): static
     {
         $this->categorie = $categorie;
+
+        return $this;
+    }
+
+    public function isPrincipal(): ?bool
+    {
+        return $this->principal;
+    }
+
+    public function setPrincipal(bool $principal): static
+    {
+        $this->principal = $principal;
 
         return $this;
     }

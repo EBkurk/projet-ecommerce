@@ -14,7 +14,11 @@
                 <th>Nom</th>
                 <th>Prix</th>
                 <th>Stock</th>
-                <th>Description</th>
+                <th>Carousel</th>
+                <th>highlander</th>
+                <th>arriver</th>
+                <th>prioriter</th>
+                <th>categorie</th>
                 <th class="no-sort">actions</th>
             </tr>
         </thead>
@@ -27,6 +31,10 @@
                 <td>{{ produit.prix }}</td>
                 <td>{{ produit.stock }}</td>
                 <td>{{ produit.description }}</td>
+                <td>{{ produit.carousel }}</td>
+                <td>{{ produit.highlander }}</td>
+                <td>{{ produit.arriver|date('Y-m-d') }}</td>
+                <td>{{ produit.categorie }}</td>
                 <td>
                     <a href="{{ path('app_produit_show', {'id': produit.id}) }}">show</a>
                     <a href="{{ path('app_produit_edit', {'id': produit.id}) }}">edit</a>
@@ -34,7 +42,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="7">no records found</td>
+                <td colspan="11">no records found</td>
             </tr>
         {% endfor %}
         </tbody>

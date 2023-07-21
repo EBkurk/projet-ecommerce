@@ -16,6 +16,7 @@
                 <th>Region</th>
                 <th>Code_postal</th>
                 <th>Pays</th>
+                <th>Utilisateur</th>
                 <th class="no-sort">actions</th>
             </tr>
         </thead>
@@ -29,6 +30,7 @@
                 <td>{{ adresse.region }}</td>
                 <td>{{ adresse.codePostal }}</td>
                 <td>{{ adresse.pays }}</td>
+                <td>{{ adresse.utilisateur }}</td>
                 <td>
                     <a href="{{ path('app_adresse_show', {'id': adresse.id}) }}">show</a>
                     <a href="{{ path('app_adresse_edit', {'id': adresse.id}) }}">edit</a>
@@ -36,7 +38,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="8">no records found</td>
+                <td colspan="9">no records found</td>
             </tr>
         {% endfor %}
         </tbody>

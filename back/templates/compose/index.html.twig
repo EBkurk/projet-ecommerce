@@ -11,19 +11,19 @@
             <tr>
                 <td class="no-sort colloneTable"><input id="checkboxAll" type="checkbox" onchange="selectAll(this)"></td>
                 <th>Id</th>
-                <th>Materiaux Id</th>
-                <th>Produit Id</th>
+                <th>Materiaux</th>
+                <th>Produit</th>
                 <th class="no-sort">actions</th>
             </tr>
         </thead>
         <tbody>
         {% for compose in composes %}
             <tr>
+                <td><input type="checkbox" onchange="selectOne()"></td>
                 <td>{{ compose.id }}</td>
                 <td>{{ compose.materiaux }}</td>
                 <td>{{ compose.produit }}</td>
                 <td>
-                    <td><input type="checkbox" onchange="selectOne()"></td>
                     <a href="{{ path('app_compose_show', {'id': compose.id}) }}">show</a>
                     <a href="{{ path('app_compose_edit', {'id': compose.id}) }}">edit</a>
                 </td>
