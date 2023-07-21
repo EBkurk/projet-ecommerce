@@ -95,7 +95,6 @@ class ImageController extends BackAbstractController
         }
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
-            dd($data);
             unlink($oldFile);
             unlink('../../public/'.$oldFile);
             $fileSystem = new Filesystem();

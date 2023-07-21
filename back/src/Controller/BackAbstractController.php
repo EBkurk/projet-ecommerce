@@ -62,6 +62,10 @@ class BackAbstractController extends AbstractController
             foreach ($idObjet as $value) {
                 $objet = $repository->find($value);
                 if ($objet) {
+                    if($nomObjet == "Image"){
+                        unlink($objet->getUrl());
+                        unlink('../../public/'.$objet->getUrl());
+                    }
                     $objectsToDelete[] = $objet;
                 }
             }
